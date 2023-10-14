@@ -36,9 +36,7 @@ export const genres = {
 
 function App() {
   return (
-    <Layout>
-      <MyRoutes />
-    </Layout>
+    <Layout></Layout>
     // <div>
     //   <NewDropDown title='Popular Movies' menuItems={arabicGenresNameFirst} />
 

@@ -1,5 +1,5 @@
-import { Route, Link, Routes } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { Route, Link, Routes } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
 export default function PaginationButtons({ currentPage, currentGenre }) {
   const [visiblePages, setVisiblePages] = useState([]);
@@ -17,7 +17,7 @@ export default function PaginationButtons({ currentPage, currentGenre }) {
     }
 
     setCurrentPageState(currentPage);
-    console.log("visible pages now ->", visiblePages);
+    console.log('visible pages now ->', visiblePages);
   }, [currentPage, currentGenre]);
 
   return (
@@ -43,8 +43,8 @@ export default function PaginationButtons({ currentPage, currentGenre }) {
           className={`mb-5 rounded-full px-4 py-2 text-xl font-bold active:border-2 active:border-red-500 active:bg-white active:bg-red-500 active:text-white
           ${
             index === 2
-              ? "border-2 border-red-500  text-red-500 "
-              : "bg-white text-red-500"
+              ? 'border-2 border-red-500  text-red-500 '
+              : 'bg-white text-red-500'
           }`}
         >
           <Link to={`/popular/${currentGenre}/${pageNumber}`}>
@@ -56,7 +56,11 @@ export default function PaginationButtons({ currentPage, currentGenre }) {
         onClick={() => handleClickNext()}
         className='mb-5 rounded-full bg-red-500 px-4 py-2 text-xl font-bold  text-white active:border-2 active:border-red-500 active:bg-white active:text-red-500'
       >
-        <Link to={`/popular/${currentGenre}/${parseInt(currentPageState) + 1}`}>
+        <Link
+          to={`https://fraja-movies-english.vercel.app/popular/${currentGenre}/${
+            parseInt(currentPageState) + 1
+          }`}
+        >
           Next
         </Link>
       </button>

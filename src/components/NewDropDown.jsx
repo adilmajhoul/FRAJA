@@ -79,7 +79,11 @@ export default function NewDropDown({
               }}
               className='cursor-pointer px-4 py-2 hover:text-red-600'
             >
-              <Link to={`popular/${englishGenresList[index]}/1`}>{item}</Link>
+              <Link
+                to={`https://fraja-movies-english.vercel.app/popular/${englishGenresList[index]}/1`}
+              >
+                {item}
+              </Link>
             </li>
           ))}
         </ul>
