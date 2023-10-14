@@ -60,7 +60,7 @@ function PosterCard({ show }) {
                   </div>
                   {/* ----------------------------------------- */}
                 </div>
-                <div className='bg-gradient-to-t from-gray-500 group-hover:bg-opacity-50 w-full border border-green-600 mx-2 mb-8 flex justify-center text-left text-lg font-semibold'>
+                <div className='bg-gradient-to-t from-gray-500 group-hover:bg-opacity-50 w-full border  mx-2 mb-8 flex justify-center text-left text-lg font-semibold'>
                   <div className=''>{show.title}</div>
                 </div>
               </div>
