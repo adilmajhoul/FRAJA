@@ -1,7 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { Routes, Route, Link, useParams } from 'react-router-dom';
-import { arabicGenresNameFirst } from '../data/arabicGenresNameFirst';
 
 import { genres } from '../App';
 export default function NewDropDown({
@@ -71,7 +70,7 @@ export default function NewDropDown({
             setIsOverList(false);
           }}
         >
-          {Object.keys(arabicGenresNameFirst).map((item, index) => (
+          {Object.keys(menuItems).map((item, index) => (
             <li
               key={index}
               onClick={() => {
