@@ -54,7 +54,7 @@ function PosterCard({ show }) {
                       {show.vote_average}
                       <span className=' mx-1'>★</span>
                     </span>
-                    <span className='w-fit h-fit rounded-full my-[1px] py-[1px] px-[3px] text-black bg-[#ffcc26] w-min'>
+                    <span className='w-auto h-fit rounded-full my-[1px] py-[1px] px-[3px] text-black bg-[#ffcc26] w-min'>
                       votes: {show.vote_count}
                     </span>
                   </div>
