@@ -10,7 +10,7 @@ export default function MyRoutes() {
     <div>
       <Routes>
         <Route
-          path='https://fraja-movies-english.vercel.app/popular/:genre/:page'
+          path='/popular/:genre/:page'
           element={<MappedPosterWithPages />}
         />
 

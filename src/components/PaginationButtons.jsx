@@ -56,11 +56,7 @@ export default function PaginationButtons({ currentPage, currentGenre }) {
         onClick={() => handleClickNext()}
         className='mb-5 rounded-full bg-red-500 px-4 py-2 text-xl font-bold  text-white active:border-2 active:border-red-500 active:bg-white active:text-red-500'
       >
-        <Link
-          to={`https://fraja-movies-english.vercel.app/popular/${currentGenre}/${
-            parseInt(currentPageState) + 1
-          }`}
-        >
+        <Link to={`/popular/${currentGenre}/${parseInt(currentPageState) + 1}`}>
           Next
         </Link>
       </button>
