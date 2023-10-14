@@ -37,7 +37,7 @@ export default function NewDropDown({
   return (
     <div className='relative inline-block text-right'>
       <button
-        className={`flex flex-row items-center rounded  px-4 py-2 text-lg font-medium bg-gray-600 text-white ${
+        className={`flex flex-row items-center rounded  px-4 py-2 text-lg font-medium  text-white ${
           isOpen ? 'text-red-500' : ''
         }`}
         ref={button}
