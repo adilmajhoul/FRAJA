@@ -6,10 +6,6 @@ import { apiKey } from '../data/apiKey';
 import PosterCard from './PosterCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import PaginationButtons from './PaginationButtons';
-// Create a cache object
-const cache = {};
-
 export default function MappedPosterWithInfiniteScroll() {
   const [moviesList, setMoviesList] = useState([]);
   const { genre, page } = useParams();
@@ -37,8 +33,8 @@ export default function MappedPosterWithInfiniteScroll() {
 
   useEffect(() => {
     setCurrentPage(parseInt(page) || 1);
-    setMoviesList([]); // Reset the movies list when the genre or page changes
-    hasMoreData.current = true; // Reset hasMoreData to true
+    setMoviesList([]);
+    hasMoreData.current = true;
 
     fetchData();
   }, [genre, page]);
