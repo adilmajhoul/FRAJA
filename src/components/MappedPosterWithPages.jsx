@@ -55,6 +55,8 @@ export default function MappedPosterWithInfiniteScroll() {
 
   return (
     <div>
+      <span>default shows</span>
+
       <InfiniteScroll
         dataLength={moviesList.length}
         next={fetchData}

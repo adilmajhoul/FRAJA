@@ -110,6 +110,8 @@ export default function MappedForFilter() {
 
   return (
     <div>
+      <span>filtered shows</span>
+
       <InfiniteScroll
         dataLength={setShowsList.length}
         next={fetchData}

@@ -12,6 +12,10 @@ export default function FilterByTitle() {
   const [showsList, setShowsList] = useAtom(shows);
   const [titleFiltering, setTitleFiltering] = useAtom(isTitleFiltering);
 
+  if (titleQuery == '') {
+    setTitleFiltering(false);
+  }
+
   const dropRef = useRef();
 
   function handleClickOutside(event) {

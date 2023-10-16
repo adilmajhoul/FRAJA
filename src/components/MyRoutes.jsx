@@ -14,7 +14,7 @@ export default function MyRoutes() {
           element={<MappedPosterWithPages />}
         />
 
-        <Route path='/' element={<MappedPosterWithPages />} />
+        {/* <Route path='/' element={<MappedPosterWithPages />} /> */}
 
         {/* <Route path='popular/:genre/:page/:movieId' element={<MoviePage />} /> */}
       </Routes>
