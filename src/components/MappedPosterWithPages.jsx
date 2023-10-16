@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { genres } from '../App';
+
 import axios from 'axios';
-import { apiKey } from '../data/apiKey';
 import PosterCard from './PosterCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
+
+import { useAtom } from 'jotai';
+import { byRatingMin, byRatingMax } from './search/atoms';
+import { englishGenresNameFirst as genres } from '../data/englishGenresNameFirst';
+import { apiKey } from '../data/apiKey';
 
 export default function MappedPosterWithInfiniteScroll() {
   const [moviesList, setMoviesList] = useState([]);
@@ -12,6 +16,12 @@ export default function MappedPosterWithInfiniteScroll() {
 
   const [currentPage, setCurrentPage] = useState(parseInt(page) || 1);
   const hasMoreData = useRef(true);
+
+  const [minRating, setMinRating] = useAtom(byRatingMin);
+  const [maxRating, setMaxRating] = useAtom(byRatingMax);
+  function ratingFilter(show) {
+    return show.vote_average >= minRating && show.vote_average <= maxRating;
+  }
 
   const fetchData = async () => {
     try {
@@ -21,7 +31,11 @@ export default function MappedPosterWithInfiniteScroll() {
       const data = res.data.results;
 
       if (data.length > 0) {
-        setMoviesList((prevMovies) => [...prevMovies, ...data]);
+        setMoviesList((prevMovies) => [
+          ...prevMovies,
+          ...data.filter((show) => ratingFilter(show)),
+        ]);
+
         setCurrentPage(currentPage + 1);
       } else {
         hasMoreData.current = false;
@@ -33,11 +47,11 @@ export default function MappedPosterWithInfiniteScroll() {
 
   useEffect(() => {
     setCurrentPage(parseInt(page) || 1);
-    setMoviesList([]);
-    hasMoreData.current = true;
+    setMoviesList([]); // Reset the movies list when the genre or page changes
+    hasMoreData.current = true; // Reset hasMoreData to true
 
     fetchData();
-  }, [genre, page]);
+  }, [genre, page, minRating, maxRating]);
 
   return (
     <div>
@@ -56,43 +70,3 @@ export default function MappedPosterWithInfiniteScroll() {
     </div>
   );
 }
-
-// export default function MappedPosterWithPages() {
-//   const [moviesList, setMoviesList] = useState([]);
-//   const { genre, page } = useParams();
-
-//   useEffect(() => {
-//     async function fetchGenrePage() {
-//       try {
-//         // Check if the data is already in the cache
-//         if (cache[`${genre}-${page}`]) {
-//           setMoviesList(cache[`${genre}-${page}`]);
-//         } else {
-//           const res = await axios.get(
-//             `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${genres[genre]}&page=${page}`
-//           );
-//           const data = res.data.results;
-//           setMoviesList(data);
-
-//           // Store the data in the cache
-//           cache[`${genre}-${page}`] = data;
-//         }
-//       } catch (error) {
-//         console.error(error);
-//       }
-//     }
-
-//     fetchGenrePage();
-//   }, [genre, page]);
-
-//   return (
-//     <div>
-//       <div className='flex flex-wrap justify-center'>
-//         {moviesList &&
-//           moviesList.map((show, idx) => <PosterCard show={show} key={idx} />)}
-//       </div>
-//       {/* TODO: build a seperetae component for this pages buttons */}
-//       <PaginationButtons currentPage={page} currentGenre={genre} />
-//     </div>
-//   );
-// }

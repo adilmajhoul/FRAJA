@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Link, useParams } from 'react-router-dom'; // Import Link component
-import { genres } from '../App';
+import { englishGenresNameFirst as genres } from '../data/englishGenresNameFirst';
 
 import MappedPosterWithPages from './MappedPosterWithPages';
 

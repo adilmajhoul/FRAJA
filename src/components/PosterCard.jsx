@@ -24,6 +24,9 @@ function PosterCard({ show }) {
   function getGenres(ids) {
     return ids.map((id) => englishGenresIdFirst[id]);
   }
+  function parseYear(yearString) {
+    return yearString.split('-')[0];
+  }
   return (
     <Link to={`/popular/${genre}/${page}/${show.id}`}>
       <div
@@ -51,11 +54,15 @@ function PosterCard({ show }) {
                     ))}
 
                     <span className='whitespace-nowrap w-fit h-fit rounded-full my-[1px] py-[1px] px-[3px] text-black bg-[#ffcc26] w-min'>
-                      votes: {show.vote_count}
+                      Votes: {show.vote_count}
                     </span>
 
                     <span className='whitespace-nowrap flex items-center h-min rounded-full my-[1px] py-[1px] px-[3px] font-extrabold text-black bg-[#ffcc26] w-min'>
                       {show.vote_average}
+                    </span>
+
+                    <span className='whitespace-nowrap w-fit h-fit rounded-full my-[1px] py-[1px] px-[3px] text-black bg-[#ffcc26] w-min'>
+                      Year: {parseYear(show.release_date)}
                     </span>
                   </div>
                   {/* ----------------------------------------- */}

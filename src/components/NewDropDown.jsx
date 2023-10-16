@@ -1,8 +1,8 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { Routes, Route, Link, useParams } from 'react-router-dom';
+import { englishGenresNameFirst as genres } from '../data/englishGenresNameFirst';
 
-import { genres } from '../App';
 export default function NewDropDown({
   title,
   menuItems = { testItem1: 1, testItem2: 2 },
