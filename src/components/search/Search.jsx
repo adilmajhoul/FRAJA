@@ -15,18 +15,22 @@ export default function Search() {
   return (
     <div>
       <div
-        className='mt-10 mx-5 text-[#aaa] border-2 h-14
+        className='divide-x divide-red-700 mt-10 mx-5 text-[#aaa] border-2 h-14
        border-red-600 flex flex-row justify-between items-center
        rounded-lg'
       >
         <div>
-          still needs polishing
           <FilterByTitle />
         </div>
+
         <div>by genre</div>
+
         <FilterByRating />
+
         <div>by year</div>
+
         <div>tv || movie</div>
+
         <button
           className='hover:bg-red-700'
           onClick={() => {
