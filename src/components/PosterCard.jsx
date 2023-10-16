@@ -32,7 +32,7 @@ function PosterCard({ show }) {
       <div
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
-        className={`group m-4 flex  h-[300px] w-[200px] flex-col justify-between rounded-xl border  border-red-600 text-right hover:cursor-pointer`}
+        className={`group m-4 flex  h-[300px] w-[200px] flex-col justify-between rounded-xl text-right hover:cursor-pointer`}
       >
         {/* link */}
         <div
@@ -42,8 +42,8 @@ function PosterCard({ show }) {
           }}
         >
           {isOpen && (
-            <div className='h-full flex-col rounded-xl border bg-red-900 bg-opacity-0 text-sm font-semibold text-white group-hover:bg-opacity-70'>
-              <div className='m-2 flex h-full flex-col justify-between'>
+            <div className='h-full flex-col rounded-xl bg-red-900 bg-opacity-0 text-sm font-semibold text-white group-hover:bg-opacity-70'>
+              <div className='p-2 flex h-full flex-col justify-between'>
                 <div className='flex flex-col text-sm font-semibold'>
                   {/* genres ----------------------------------------- */}
                   <div className=' flex flex-col items-end'>
@@ -67,7 +67,7 @@ function PosterCard({ show }) {
                   </div>
                   {/* ----------------------------------------- */}
                 </div>
-                <div className='w-full mx-2 mb-8 flex justify-center text-left text-lg font-extrabold'>
+                <div className='w-full px-2 pb-4 flex justify-center text-left text-xl font-extrabold'>
                   <div className=''>{show.title}</div>
                 </div>
               </div>

@@ -14,7 +14,11 @@ export default function Search() {
 
   return (
     <div>
-      <div className='border-2 border-black flex flex-row justify-between items-center'>
+      <div
+        className='mt-10 mx-5 text-[#aaa] border-2 h-14
+       border-red-600 flex flex-row justify-between items-center
+       rounded-lg'
+      >
         <div>
           still needs polishing
           <FilterByTitle />

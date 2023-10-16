@@ -15,8 +15,8 @@ export default function FilterByRating() {
   };
 
   return (
-    <div>
-      Filter By Rating
+    <div className='flex items-center'>
+      Rating
       <MultiRangeSlider
         className='h-12 w-48'
         min={0}
@@ -34,10 +34,6 @@ export default function FilterByRating() {
           handleInput(e);
         }}
       />
-      <div className='flex justify-between'>
-        <span>min:{minRating}</span>
-        <span>max:{maxRating}</span>
-      </div>
     </div>
   );
 }
