@@ -3,7 +3,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Routes, Route, Link, useParams } from 'react-router-dom';
 import { englishGenresNameFirst as genres } from '../data/englishGenresNameFirst';
 
-export default function NewDropDown({
+export default function FilterByGenreDropDowns({
   title,
   menuItems = { testItem1: 1, testItem2: 2 },
 }) {

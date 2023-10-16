@@ -15,8 +15,7 @@ export default function FilterByRating() {
   };
 
   return (
-    <div className='flex items-center'>
-      Rating
+    <div>
       <MultiRangeSlider
         className='h-12 w-48'
         min={0}

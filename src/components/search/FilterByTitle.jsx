@@ -39,7 +39,7 @@ export default function FilterByTitle() {
   return (
     <div className='w-1/5 '>
       <input
-        className='mx-2 my-1 text-xl rounded rounded-lg border-2 border-gray-400'
+        className='mx-2 my-2 text-xl rounded-md '
         value={titleQuery}
         onChange={(e) => {
           setTitleFiltering(true);
@@ -53,13 +53,10 @@ export default function FilterByTitle() {
         type='text'
       />
       {isTyping && (
-        <div
-          className='border-2 border-gray-400  rounded-md absolute  border-black'
-          ref={dropRef}
-        >
+        <div className=' border-2 rounded-md absolute ' ref={dropRef}>
           {showsTitles.map((title) => (
             <div
-              className='bg-white cursor-pointer hover:bg-gray-300'
+              className='py-1 px-2 bg-white text-black cursor-pointer hover:bg-gray-300'
               onClick={() => {
                 setIsTyping(false);
                 setTitleQuery(title);
