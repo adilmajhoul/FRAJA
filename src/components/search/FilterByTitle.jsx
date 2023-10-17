@@ -14,6 +14,8 @@ export default function FilterByTitle() {
   const [showsList, setShowsList] = useAtom(shows);
   const [titleFiltering, setTitleFiltering] = useAtom(isTitleFiltering);
 
+  const [clickedSuggestion, setClickedSuggestion] = useState(false);
+
   if (titleQuery == '') {
     setTitleFiltering(false);
   }
@@ -38,12 +40,14 @@ export default function FilterByTitle() {
     };
   });
 
-  // useEffect(() => {
-  //   if (clicked) {
-  //     setTitleQuery(titleQuery);
-  //   }
-  //   setclicked(false);
-  // }, [titleQuery]);
+  // fixed that problem of when suggestion clicked no show apears (its a stupid fix but works)
+  useEffect(() => {
+    if (clickedSuggestion) {
+      setTitleQuery((prev) => prev + ' ');
+
+      setClickedSuggestion(false);
+    }
+  }, [titleQuery]);
 
   return (
     <div className='w-1/5 '>
@@ -68,11 +72,9 @@ export default function FilterByTitle() {
               className='py-1 px-2 bg-white text-black cursor-pointer hover:bg-gray-300'
               onClick={() => {
                 setIsTyping(false);
-                setTitleFiltering(true);
-
-                // TODO: fix this when you click the titleQuery is set to this title in this loop
-
                 setTitleQuery(title);
+
+                setClickedSuggestion(true);
               }}
             >
               {title}

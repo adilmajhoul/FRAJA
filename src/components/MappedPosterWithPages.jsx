@@ -6,7 +6,7 @@ import PosterCard from './PosterCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { useAtom } from 'jotai';
-import { byRatingMin, byRatingMax } from './search/atoms';
+import { isTitleFiltering, byRatingMin, byRatingMax } from './search/atoms';
 import { englishGenresNameFirst as genres } from '../data/englishGenresNameFirst';
 import { apiKey } from '../data/apiKey';
 
@@ -16,6 +16,8 @@ export default function MappedPosterWithInfiniteScroll() {
 
   const [currentPage, setCurrentPage] = useState(parseInt(page) || 1);
   const hasMoreData = useRef(true);
+
+  const [titleFiltering, setTitleFiltering] = useAtom(isTitleFiltering);
 
   const [minRating, setMinRating] = useAtom(byRatingMin);
   const [maxRating, setMaxRating] = useAtom(byRatingMax);
@@ -55,20 +57,23 @@ export default function MappedPosterWithInfiniteScroll() {
 
   return (
     <div>
-      <span className='text-white'>default shows</span>
-
-      <InfiniteScroll
-        dataLength={moviesList.length}
-        next={fetchData}
-        hasMore={hasMoreData.current}
-        loader={<h4 className='text-white'>Loading...</h4>}
-      >
-        <div className='flex flex-wrap justify-center'>
-          {moviesList.map((show, idx) => (
-            <PosterCard show={show} key={idx} />
-          ))}
+      {!titleFiltering && (
+        <div>
+          <span className='text-white'>default shows</span>
+          <InfiniteScroll
+            dataLength={moviesList.length}
+            next={fetchData}
+            hasMore={hasMoreData.current}
+            loader={<h4 className='text-white'>Loading...</h4>}
+          >
+            <div className='flex flex-wrap justify-center'>
+              {moviesList.map((show, idx) => (
+                <PosterCard show={show} key={idx} />
+              ))}
+            </div>
+          </InfiniteScroll>
         </div>
-      </InfiniteScroll>
+      )}
     </div>
   );
 }

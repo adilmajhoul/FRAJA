@@ -3,6 +3,9 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Routes, Route, Link, useParams } from 'react-router-dom';
 import { englishGenresNameFirst as genres } from '../data/englishGenresNameFirst';
 
+import { useAtom } from 'jotai';
+import { isTitleFiltering } from './search/atoms';
+
 export default function NewDropDown({
   title,
   menuItems = { testItem1: 1, testItem2: 2 },
@@ -13,6 +16,8 @@ export default function NewDropDown({
   let [isTouchInput, setIsTouchInput] = useState();
   let [hasClicked, setHasClicked] = useState();
   let button = useRef(null);
+
+  const [titleFiltering, setTitleFiltering] = useAtom(isTitleFiltering);
 
   const myItems = { ...menuItems };
 
@@ -75,6 +80,8 @@ export default function NewDropDown({
               key={index}
               onClick={() => {
                 setIsOpen(false);
+
+                setTitleFiltering(false);
               }}
               className='cursor-pointer px-4 py-2 hover:text-red-600'
             >
