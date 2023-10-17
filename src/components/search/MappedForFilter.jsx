@@ -110,13 +110,13 @@ export default function MappedForFilter() {
 
   return (
     <div>
-      <span>filtered shows</span>
+      <span className='text-white'>filtered shows</span>
 
       <InfiniteScroll
         dataLength={setShowsList.length}
         next={fetchData}
         hasMore={hasMoreData.current}
-        loader={<h4>Loading...</h4>}
+        loader={<h4 className='text-white'>Loading...</h4>}
       >
         <div className='flex flex-wrap justify-center'>
           {showsList.map((show, idx) => (

@@ -55,13 +55,13 @@ export default function MappedPosterWithInfiniteScroll() {
 
   return (
     <div>
-      <span>default shows</span>
+      <span className='text-white'>default shows</span>
 
       <InfiniteScroll
         dataLength={moviesList.length}
         next={fetchData}
         hasMore={hasMoreData.current}
-        loader={<h4>Loading...</h4>}
+        loader={<h4 className='text-white'>Loading...</h4>}
       >
         <div className='flex flex-wrap justify-center'>
           {moviesList.map((show, idx) => (

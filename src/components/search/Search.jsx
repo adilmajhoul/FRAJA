@@ -14,15 +14,12 @@ export default function Search() {
 
   return (
     <div className='mt-10'>
-      <div className='text-[#aaa]'>Filter By:</div>
-
       <div
-        className='font-semibold text-xl text-[#aaa] flex  mx-5   h-14
+        className='bg-gray-700 font-semibold text-xl text-gray-300 flex  mx-5   h-14
          flex-row justify-between items-center
        rounded-lg'
       >
         <div className='flex items-center'>
-          <span className='pr-2 text-[#aaa]'>Tile</span>
           <FilterByTitle />
         </div>
 

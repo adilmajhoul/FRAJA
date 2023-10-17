@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { apiAuthToken } from '../apiAuthToken';
 import { useAtom } from 'jotai';
@@ -6,6 +6,8 @@ import { isTitleFiltering, shows, titles, title_query } from './atoms';
 
 export default function FilterByTitle() {
   const [isTyping, setIsTyping] = useState(false);
+
+  const [clicked, setclicked] = useState(false);
 
   const [titleQuery, setTitleQuery] = useAtom(title_query);
   const [showsTitles, setShowsTitles] = useAtom(titles);
@@ -36,10 +38,17 @@ export default function FilterByTitle() {
     };
   });
 
+  // useEffect(() => {
+  //   if (clicked) {
+  //     setTitleQuery(titleQuery);
+  //   }
+  //   setclicked(false);
+  // }, [titleQuery]);
+
   return (
     <div className='w-1/5 '>
       <input
-        className='mx-2 my-2 text-xl rounded-md '
+        className='text-gray-700 mx-2 my-2 text-xl rounded-md '
         value={titleQuery}
         onChange={(e) => {
           setTitleFiltering(true);
@@ -60,6 +69,8 @@ export default function FilterByTitle() {
               onClick={() => {
                 setIsTyping(false);
                 setTitleFiltering(true);
+
+                // TODO: fix this when you click the titleQuery is set to this title in this loop
 
                 setTitleQuery(title);
               }}

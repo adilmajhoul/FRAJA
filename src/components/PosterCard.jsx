@@ -32,7 +32,7 @@ function PosterCard({ show }) {
       <div
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
-        className={`group m-4 flex  h-[300px] w-[200px] flex-col justify-between rounded-xl text-right hover:cursor-pointer`}
+        className={`group m-4 flex  h-[400px] w-[300px] flex-col justify-between rounded-xl text-right hover:cursor-pointer`}
       >
         {/* link */}
         <div
