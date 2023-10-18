@@ -7,6 +7,7 @@ import MappedPosterWithPages from '../MappedPosterWithPages';
 
 import Search from '../search/Search';
 import Login from '../auth/Login';
+import Signup from '../auth/Signup';
 export default function MyRoutes() {
   return (
     <div>
@@ -19,6 +20,7 @@ export default function MyRoutes() {
 
         {/* authentification */}
         <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
       </Routes>
     </div>
   );

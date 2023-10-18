@@ -10,7 +10,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const SignIn = (e) => {
+  const login = (e) => {
     e.preventDefault();
 
     signInWithEmailAndPassword(auth, email, password)
@@ -23,10 +23,10 @@ export default function Login() {
   };
 
   return (
-    <div id='adil' className='h-screen flex items-center'>
+    <div className='h-screen flex items-center'>
       <img
-        className='opacity-70 h-screen object-cover w-1/2'
-        src='https://picjumbo.com/wp-content/uploads/young-woman-watching-tv-and-eating-popcorn-at-night-free-photo.jpg'
+        className='opacity-50 h-screen object-cover w-1/2'
+        src='https://www.replacementremotes.com/blog/wp-content/uploads/2017/12/person-watches-TV-at-night-in-his-bed.jpg'
         alt=''
       />
 
@@ -36,7 +36,7 @@ export default function Login() {
         </div>
         <form
           className='flex flex-col justify-between bg-opacity-40 absolute inset-0 top-28 shadow-2xl border-4 border-[#aaa]  h-96 m-10 rounded-xl p-10 bg-[#303030] text-gray-400'
-          onSubmit={SignIn}
+          onSubmit={login}
         >
           <div className='flex flex-col'>
             <label className='text-xl font-bold text-[#aaa]'>
@@ -72,12 +72,14 @@ export default function Login() {
           >
             <Link to='/home'>Log In </Link>
           </button>
-          <span className='text-white'>
-            You Don't Have An Account ?
-            <span className='cursor-pointer font-semibold text-lg ml-4 text-red-600'>
-              Create One Here
+          <Link to='/signup'>
+            <span className='text-white'>
+              You Don't Have An Account ?
+              <span className='cursor-pointer font-semibold text-lg ml-4 text-red-600'>
+                Create One Here
+              </span>
             </span>
-          </span>
+          </Link>
         </form>
       </div>
     </div>
