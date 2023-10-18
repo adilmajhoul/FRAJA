@@ -12,7 +12,7 @@ import NewDropDown from './NewDropDown';
 // ---------------------------------------
 import { Route, Link, Routes } from 'react-router-dom';
 
-import { arabicGenresNameFirst } from '../data/arabicGenresNameFirst';
+import { arabicGenresNameFirst } from '../../data/arabicGenresNameFirst';
 
 export default function NavBar({
   currentPage,
@@ -71,10 +71,12 @@ export default function NavBar({
       <div className='mx-2 my-1 flex w-1/4 flex-row items-center justify-between '>
         {/* social media links */}
         <div className=' flex flex-row items-center text-[#aaa]'>
-          <button className='mx-1 flex justify-between rounded-full border-2 border-red-600 px-2 py-1 text-white ring-gray-300 focus:ring-1'>
-            دخول / تسجيل
-            <BiUser className='ml-2 h-6 w-6 rounded-full bg-red-600 text-[#303030]' />
-          </button>
+          <Link to='/login'>
+            <button className='mx-1 flex justify-between rounded-full border-2 border-red-600 px-2 py-1 text-white ring-gray-300 focus:ring-1'>
+              دخول / تسجيل
+              <BiUser className='ml-2 h-6 w-6 rounded-full bg-red-600 text-[#303030]' />
+            </button>
+          </Link>
           <BiSearch className=' mx-1 h-8 w-8 rounded rounded-full bg-gray-600 p-1 text-gray-300 hover:cursor-pointer hover:text-[#303030] hover:text-gray-200 ' />
         </div>
 

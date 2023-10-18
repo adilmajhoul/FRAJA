@@ -1,10 +1,10 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { Routes, Route, Link, useParams } from 'react-router-dom';
-import { englishGenresNameFirst as genres } from '../data/englishGenresNameFirst';
+import { englishGenresNameFirst as genres } from '../../data/englishGenresNameFirst';
 
 import { useAtom } from 'jotai';
-import { isTitleFiltering } from './search/atoms';
+import { isTitleFiltering } from '../search/atoms';
 
 export default function NewDropDown({
   title,

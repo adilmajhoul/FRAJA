@@ -41,7 +41,7 @@ export default function Search() {
       </div>
       {titleFiltering && <MappedForFilter />}
       {/* TODO: check why did not work later or not ? :D */}
-      {/* {isRatingFiltering && !titleFiltering && <MappedPosterWithPages />} */}
+      <MappedPosterWithPages />
     </div>
   );
 }

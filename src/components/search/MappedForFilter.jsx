@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import axios from 'axios';
-import { apiAuthToken } from '../apiAuthToken';
+import { apiAuthToken } from '../../data/apiAuthToken';
 
 import PosterCard from '../PosterCard';
 import InfiniteScroll from 'react-infinite-scroll-component';

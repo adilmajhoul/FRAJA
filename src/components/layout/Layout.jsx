@@ -1,12 +1,11 @@
 import React from 'react';
-import NavBar from './navBar';
-import MyRoutes from './MyRoutes';
-import Search from './search/Search';
+import NavBar from '../navbar/navBar';
+import MyRoutes from '../routes/MyRoutes';
+import Search from '../search/Search';
 export default function Layout({ children }) {
   return (
     <div>
       <NavBar />
-      <Search />
       {children}
       <MyRoutes />
     </div>

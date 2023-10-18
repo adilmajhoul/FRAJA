@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
-import { apiAuthToken } from '../apiAuthToken';
+import { apiAuthToken } from '../../data/apiAuthToken';
 import { useAtom } from 'jotai';
 import { isTitleFiltering, shows, titles, title_query } from './atoms';
 
