@@ -14,7 +14,23 @@ export default function MappedPosterWithInfiniteScroll() {
   const [moviesList, setMoviesList] = useState([]);
   const { genre, page } = useParams();
 
-  const [currentPage, setCurrentPage] = useState(parseInt(page) || 1);
+  function randome(pageOrGenre) {
+    const numberList = [
+      28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878,
+      10770, 53, 10752, 37,
+    ];
+    const randomIndex = Math.floor(Math.random() * numberList.length);
+
+    if (pageOrGenre === 'genre') {
+      return numberList[randomIndex];
+    } else if (pageOrGenre === 'page') {
+      return Math.floor(Math.random() * 100);
+    }
+  }
+
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(page) || randome('page')
+  );
   const hasMoreData = useRef(true);
 
   const [titleFiltering, setTitleFiltering] = useAtom(isTitleFiltering);
@@ -28,7 +44,9 @@ export default function MappedPosterWithInfiniteScroll() {
   const fetchData = async () => {
     try {
       const res = await axios.get(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${genres[genre]}&page=${currentPage}`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${
+          genres[genre] || randome('genre')
+        }&page=${currentPage}`
       );
       const data = res.data.results;
 

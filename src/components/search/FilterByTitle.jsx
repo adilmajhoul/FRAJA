@@ -72,6 +72,7 @@ export default function FilterByTitle() {
               className='py-1 px-2 bg-white text-black cursor-pointer hover:bg-gray-300'
               onClick={() => {
                 setIsTyping(false);
+
                 setTitleQuery(title);
 
                 setClickedSuggestion(true);
