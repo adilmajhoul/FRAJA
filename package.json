@@ -4,15 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "dev": "node -r dotenv/config ./node_modules/.bin/vite",
+    "build": "tsc && node -r dotenv/config ./node_modules/.bin/vite build",
+    "preview": "node -r dotenv/config ./node_modules/.bin/vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.36.1",
     "axios": "^1.5.1",
     "browserify": "^17.0.0",
+    "dotenv": "^16.3.1",
     "firebase": "^10.5.0",
     "jotai": "^2.4.3",
     "multi-range-slider-react": "^2.0.5",
