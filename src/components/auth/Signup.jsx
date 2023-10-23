@@ -10,15 +10,24 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const signUp = (e) => {
+  const [firebaseId, setFirebaseId] = useState('');
+
+  const handleCreateAccount = (e) => {
     e.preventDefault();
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+        // Signed up
+        const user = userCredential.user;
+        setFirebaseId(user.uid);
+        // ...
       })
       .catch((error) => {
-        console.log(error);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        console.log(error.message);
+        // ..
       });
   };
 
@@ -36,7 +45,7 @@ function Signup() {
         </div>
         <form
           className='flex flex-col justify-between bg-opacity-40 absolute inset-0 top-28 shadow-2xl border-4 border-[#aaa]  h-96 m-10 rounded-xl p-10 bg-[#303030] text-gray-400'
-          onSubmit={signUp}
+          onSubmit={(e) => handleCreateAccount(e)}
         >
           <div className='flex flex-col'>
             <label className='text-xl font-bold text-[#aaa]'>
@@ -70,7 +79,7 @@ function Signup() {
             type='submit'
             class='flex w-full justify-center rounded-md bg-red-600 py-1.5 font-semibold text-white hover:border-2 active:bg-transparent hover:border-red-600 text-xl'
           >
-            <Link to='/home'>Create Account</Link>
+            <Link to={`/profile/${firebaseId}`}>Create Account</Link>
           </button>
           <Link to='/login'>
             <span className='text-white'>
