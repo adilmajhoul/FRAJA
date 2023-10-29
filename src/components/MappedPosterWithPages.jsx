@@ -6,46 +6,61 @@ import PosterCard from './PosterCard';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { useAtom } from 'jotai';
-import { isTitleFiltering, byRatingMin, byRatingMax } from './search/atoms';
+import {
+  isTitleFiltering,
+  byRatingMin,
+  byRatingMax,
+  catchRandomGenre,
+  catchRandomPage,
+} from './search/atoms';
+
 import { englishGenresNameFirst as genres } from '../data/englishGenresNameFirst';
 import { apiKey } from '../data/apiKey';
 
+import randomFetch from '../utils/randomFetch';
+
 export default function MappedPosterWithInfiniteScroll() {
   const [moviesList, setMoviesList] = useState([]);
-  const { genre, page } = useParams();
+  const { showType, genre, page } = useParams();
+  const [loading, setLoading] = useState(true);
 
-  function randome(pageOrGenre) {
-    const numberList = [
-      28, 12, 16, 35, 80, 99, 18, 10751, 14, 36, 27, 10402, 9648, 10749, 878,
-      10770, 53, 10752, 37,
-    ];
-    const randomIndex = Math.floor(Math.random() * numberList.length);
+  // --------------------
 
-    if (pageOrGenre === 'genre') {
-      return numberList[randomIndex];
-    } else if (pageOrGenre === 'page') {
-      return Math.floor(Math.random() * 100);
-    }
-  }
-
-  const [currentPage, setCurrentPage] = useState(
-    parseInt(page) || randome('page')
+  // --------------------
+  // set up random page and genre
+  const [randomGenre, setRandomGenre] = useAtom(
+    catchRandomGenre === '' ? randomFetch('genre') : catchRandomGenre
   );
+  const [randomPage, setRandomPage] = useAtom(
+    catchRandomGenre === '' ? randomFetch('page') : catchRandomGenre
+  );
+
+  // set up random page and genre
+  useEffect(() => {
+    setRandomPage(randomFetch('page'));
+    setRandomGenre(randomFetch('genre'));
+  }, []);
+
+  const [currentPage, setCurrentPage] = useState(parseInt(page) || randomPage);
+  // --------------------
+
   const hasMoreData = useRef(true);
 
   const [titleFiltering, setTitleFiltering] = useAtom(isTitleFiltering);
-
+  // --------------------
   const [minRating, setMinRating] = useAtom(byRatingMin);
   const [maxRating, setMaxRating] = useAtom(byRatingMax);
   function ratingFilter(show) {
     return show.vote_average >= minRating && show.vote_average <= maxRating;
   }
-
+  // --------------------
   const fetchData = async () => {
     try {
       const res = await axios.get(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${
-          genres[genre] || randome('genre')
+        `https://api.themoviedb.org/3/discover/${
+          showType || 'movie'
+        }?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${
+          genres[genre] || randomGenre
         }&page=${currentPage}`
       );
       const data = res.data.results;
@@ -64,15 +79,17 @@ export default function MappedPosterWithInfiniteScroll() {
       console.error(error);
     }
   };
-
+  // --------------------
   useEffect(() => {
     setCurrentPage(parseInt(page) || 1);
     setMoviesList([]); // Reset the movies list when the genre or page changes
     hasMoreData.current = true; // Reset hasMoreData to true
 
     fetchData();
-  }, [genre, page, minRating, maxRating]);
 
+    console.log('genre:', genre, 'page:', page, 'showType:', showType);
+  }, [genre, page, showType, minRating, maxRating]);
+  // --------------------
   return (
     <div>
       {!titleFiltering && (

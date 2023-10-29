@@ -13,7 +13,7 @@ export default function Search() {
   const [showsList, setShowsList] = useAtom(shows);
 
   return (
-    <div className='mt-10'>
+    <div className=''>
       <div
         className='bg-gray-700 font-semibold text-xl text-gray-300 flex  mx-5   h-14
          flex-row justify-between items-center

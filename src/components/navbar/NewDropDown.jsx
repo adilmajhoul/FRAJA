@@ -8,6 +8,7 @@ import { isTitleFiltering } from '../search/atoms';
 
 export default function NewDropDown({
   title,
+  showType,
   menuItems = { testItem1: 1, testItem2: 2 },
 }) {
   let [isOverButton, setIsOverButton] = useState(false);
@@ -85,7 +86,9 @@ export default function NewDropDown({
               }}
               className='cursor-pointer px-4 py-2 hover:text-red-600'
             >
-              <Link to={`/popular/${englishGenresList[index]}/1`}>{item}</Link>
+              <Link to={`/top/${showType}/${englishGenresList[index]}/1`}>
+                {item}
+              </Link>
             </li>
           ))}
         </ul>

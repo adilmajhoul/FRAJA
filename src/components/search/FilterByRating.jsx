@@ -9,6 +9,7 @@ export default function FilterByRating() {
 
   const [minRating, setMinRating] = useAtom(byRatingMin);
   const [maxRating, setMaxRating] = useAtom(byRatingMax);
+
   const handleInput = (e) => {
     setMinRating(e.minValue);
     setMaxRating(e.maxValue);

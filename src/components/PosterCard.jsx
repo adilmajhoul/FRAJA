@@ -12,10 +12,13 @@ const imageConfig = {
   still_sizes: ['w92', 'w185', 'w300', 'original'],
 };
 
+import { useAtom } from 'jotai';
+import { catchRandomGenre, catchRandomPage } from './search/atoms';
+
 function PosterCard({ show }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { genre, page } = useParams();
+  const { genre, page, showType } = useParams();
 
   function getPoster(posterId) {
     return `${imageConfig.base_url}/${imageConfig.poster_sizes[3]}${posterId}`;
@@ -27,8 +30,16 @@ function PosterCard({ show }) {
   function parseYear(yearString) {
     return yearString.split('-')[0];
   }
+
+  const [randomGenre, setRandomGenre] = useAtom(catchRandomGenre);
+  const [randomPage, setRandomPage] = useAtom(catchRandomPage);
   return (
-    <Link to={`/popular/${genre}/${page}/${show.id}`}>
+    // set movie page route to url params or randome in case of intering to movie  from home
+    <Link
+      to={`/top/${showType || 'movie'}/${
+        genre || englishGenresIdFirst[randomGenre]
+      }/${page || randomPage}/${show.id}`}
+    >
       <div
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
@@ -62,7 +73,8 @@ function PosterCard({ show }) {
                     </span>
 
                     <span className='whitespace-nowrap w-fit h-fit rounded-full my-[1px] py-[1px] px-[3px] text-black bg-[#ffcc26] w-min'>
-                      Year: {parseYear(show.release_date)}
+                      Year:{' '}
+                      {parseYear(show.release_date || show.first_air_date)}
                     </span>
                   </div>
                   {/* ----------------------------------------- */}

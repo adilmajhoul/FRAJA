@@ -48,24 +48,40 @@ export default function NavBar({
   };
 
   return (
-    <div className='navbar flex flex-row-reverse items-center justify-end bg-[#303030] py-3 '>
+    <div className='mx-10 h-28 navbar flex flex-row items-center justify-center  bg-[#303030] py-3 '>
       {/* logo */}
-      <Link className='flex grow ' to={'/'}>
-        <div className='mr-5 flex grow flex-row items-center justify-end text-3xl font-extrabold text-white hover:cursor-pointer '>
-          <span className='mr-2'>فراجة</span>
+      <Link className='' to='/'>
+        <div className='mx-5 flex flex-row justify-center text-3xl font-extrabold text-white hover:cursor-pointer '>
+          <span className='mr-2'>FRAJA</span>
           <BsCameraReels className='' />
         </div>
       </Link>
 
-      <div className='ml-10 flex flex-row-reverse'>
-        <button className='m-1 border-b-2 border-red-400 py-1 text-[#aaa] hover:text-[#303030] hover:text-gray-200'>
-          المضاف حديثا
-        </button>
-      </div>
+      <button className='ml-5 border-b-4 border-red-400 py-1 text-[#aaa] hover:text-[#303030] hover:text-gray-200'>
+        Trending
+      </button>
+
+      <button className='ml-5 border-b-4 border-red-400 py-1 text-[#aaa] hover:text-[#303030] hover:text-gray-200'>
+        Now Playing
+      </button>
+
+      <button className='ml-5 border-b-4 border-red-400 py-1 text-[#aaa] hover:text-[#303030] hover:text-gray-200'>
+        Upcoming
+      </button>
 
       {/* drop down buttons */}
 
-      <NewDropDown title='Popular Movies' menuItems={arabicGenresNameFirst} />
+      <NewDropDown
+        title='Top Movies'
+        showType='movie'
+        menuItems={arabicGenresNameFirst}
+      />
+      <NewDropDown
+        title='Top Tv Shows'
+        showType='tv'
+        menuItems={arabicGenresNameFirst}
+      />
+
       <NewDropDown title='Dropdown 2' />
 
       <div className='mx-2 my-1 flex w-1/4 flex-row items-center justify-between '>
