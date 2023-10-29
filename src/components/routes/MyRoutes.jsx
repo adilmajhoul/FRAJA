@@ -23,7 +23,10 @@ export default function MyRoutes() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/profile/:firebaseId' element={<Profile />} />
         // movie page route
-        <Route path='popular/:genre/:page/:movieId' element={<ShowPage />} />
+        <Route
+          path='top/:showType/:genre/:page/:movieId'
+          element={<ShowPage />}
+        />
       </Routes>
     </div>
   );
