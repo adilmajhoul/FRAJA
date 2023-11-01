@@ -35,47 +35,35 @@ export default function Login() {
           {/* <div class='opacity-80 h-1/2 w-1/2 bg-red-700'>hello</div> */}
         </div>
         <form
-          className='flex flex-col justify-between bg-opacity-40 absolute inset-0 top-28 shadow-2xl border-4 border-[#aaa]  h-96 m-10 rounded-xl p-10 bg-[#303030] text-gray-400'
+          className='flex flex-col  bg-opacity-40 absolute inset-0 top-28 shadow-2xl border-4 border-[#aaa]  h-min m-10 rounded-xl p-10 bg-[#303030] text-gray-400'
           onSubmit={login}
         >
-          <div className='flex flex-col'>
-            <label className='text-xl font-bold text-[#aaa]'>
-              Email address
-            </label>
-            <div>
-              <input
-                type='text'
-                // autocomplete="email"
-                class='font-semibold mt-1 block w-full rounded-md py-1.5 ring-1 ring-gray-400 '
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-          </div>
+          <label className='text-xl font-bold text-[#aaa]'>Email address</label>
+          <input
+            className='mb-4 focus:outline-none px-2 py-1 rounded-md focus:ring-2 focus:ring-red-600'
+            type='email'
+            name='email'
+            placeholder='Email'
+          />
 
-          <div className='flex flex-col'>
-            <label className='text-xl font-bold text-[#aaa]'>Password</label>
-            <div>
-              <input
-                type='password'
-                autocomplete='email'
-                class='font-semibold mt-1  block w-full rounded-md py-1.5 ring-1 ring-gray-400 '
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
+          <label className='text-xl font-bold text-[#aaa]'>Password</label>
+          <input
+            className='mb-5 focus:outline-none px-2 py-1 rounded-md focus:ring-2 focus:ring-red-600'
+            type='password'
+            name='password'
+            placeholder='Password'
+          />
 
           <button
             type='submit'
-            class='flex w-full justify-center rounded-md bg-red-600 py-1.5 font-semibold text-white hover:border-2 active:bg-transparent hover:border-red-600 text-xl'
+            className='mb-4 flex w-full justify-center rounded-md bg-red-600 py-1.5 font-semibold text-white active:border-4 active:bg-transparent active:border-red-600 text-xl'
           >
             <Link to='/home'>Log In </Link>
           </button>
           <Link to='/signup'>
             <span className='text-white'>
               You Don't Have An Account ?
-              <span className='cursor-pointer font-semibold text-lg ml-4 text-red-600'>
+              <span className='p-1 rounded-md cursor-pointer font-semibold text-lg ml-4 text-red-600  active:bg-red-600 active:text-white'>
                 Create One Here
               </span>
             </span>

@@ -10,7 +10,9 @@ import axios from 'axios';
 
 function Signup() {
   const [userId, setUserId] = useState('');
-  const [isAccountCreated, setIsAccountCreated] = useState(false);
+  const [isAccountCreated, setIsAccountCreated] = useState(undefined);
+
+  const [serverError, setServerErro] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,15 +21,17 @@ function Signup() {
       const formData = getFormData(e);
       const res = await signup(formData);
 
-      res._id ? setIsAccountCreated(true) : setIsAccountCreated(false);
-
-      if (res) {
+      if (res._id) {
         console.log('Signup successful:', res);
+        setIsAccountCreated(true);
       } else {
-        console.log(res.respons);
+        console.log(res.data);
+        setIsAccountCreated(false);
+
+        setServerErro(res.data);
       }
     } catch (error) {
-      console.error('Signup failed:', error);
+      console.error('Signup failed:', error.message);
     }
   };
 
@@ -45,7 +49,7 @@ function Signup() {
           className='flex flex-col bg-opacity-40 absolute inset-0 top-28 shadow-2xl border-4 border-[#aaa]  h-min m-10 rounded-xl p-10 bg-[#303030] text-gray-400'
           onSubmit={handleSubmit}
         >
-          {isAccountCreated && (
+          {isAccountCreated == true && (
             <div className='mb-4 py-2 flex justify-center rounded-md bg-green-700 text-white font-bold text-lg'>
               Account Created Successfully
               <Link
@@ -56,26 +60,27 @@ function Signup() {
               </Link>
             </div>
           )}
-          <div className='flex flex-col'>
-            <label className='text-xl font-bold text-[#aaa]'>Name</label>
 
-            <input
-              className='mb-4 focus:outline-none px-2 py-1 rounded-md focus:ring-2 focus:ring-red-600'
-              type='text'
-              name='name'
-              placeholder='name'
-            />
+          {isAccountCreated == false && (
+            <div className='mb-4 py-2 flex justify-center rounded-md bg-red-800 text-white font-bold text-lg'>
+              {serverError}
+            </div>
+          )}
+          <label className='text-xl font-bold text-[#aaa]'>Name</label>
+          <input
+            className='mb-4 focus:outline-none px-2 py-1 rounded-md focus:ring-2 focus:ring-red-600'
+            type='text'
+            name='name'
+            placeholder='name'
+          />
 
-            <label className='text-xl font-bold text-[#aaa]'>
-              Email address
-            </label>
-            <input
-              className='mb-4 focus:outline-none px-2 py-1 rounded-md focus:ring-2 focus:ring-red-600'
-              type='email'
-              name='email'
-              placeholder='Email'
-            />
-          </div>
+          <label className='text-xl font-bold text-[#aaa]'>Email address</label>
+          <input
+            className='mb-4 focus:outline-none px-2 py-1 rounded-md focus:ring-2 focus:ring-red-600'
+            type='email'
+            name='email'
+            placeholder='Email'
+          />
 
           <label className='text-xl font-bold text-[#aaa]'>Password</label>
           <input
