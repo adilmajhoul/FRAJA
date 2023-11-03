@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route, Link, useParams } from 'react-router-dom'; // Import Link component
 import { englishGenresNameFirst as genres } from '../../data/englishGenresNameFirst';
 
@@ -11,8 +11,13 @@ import Signup from '../auth/Signup';
 import Profile from '../user/Profile';
 
 import ShowPage from '../show/ShowPage';
-
+import ProfilePrototype from '../user/ProfilePrototype';
+import { checkAuthenticated } from '../../utils/checkAuthenticated';
+import axios from 'axios';
+import ProtectedRoute from './ProtectedRoute';
 export default function MyRoutes() {
+  const [isAllowed, setIsAllowed] = useState(undefined);
+
   return (
     <div>
       <Routes>
@@ -21,12 +26,25 @@ export default function MyRoutes() {
         {/* authentification */}
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/profile/:firebaseId' element={<Profile />} />
+        {/* <Route path='/profile/:firebaseId' element={<Profile />} /> */}
         // movie page route
         <Route
           path='top/:showType/:genre/:page/:movieId'
           element={<ShowPage />}
         />
+        {/* <Route
+          path='/profile'
+          element={isAllowed == true ? <ProfilePrototype /> : <Search />}
+        /> */}
+        {/* <Route
+          path='/profile'
+          render={() =>
+            isAllowed == true ? <ProfilePrototype /> : <Redirect to='/' />
+          }
+        /> */}
+        <Route element={<ProtectedRoute />}>
+          <Route path='/profile' element={<ProfilePrototype />} />
+        </Route>
       </Routes>
     </div>
   );

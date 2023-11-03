@@ -7,8 +7,9 @@ const URL = 'https://fraja-movies-english-api.vercel.app/api';
 
 //PROFILE AUTHENTICATION
 export const SIGN_UP = `${URL}/signup`;
-export const SIGN_OUT = `${URL}/logout`;
 export const LOG_IN = `${URL}/login`;
+export const SIGN_OUT = `${URL}/logout`;
+export const TOKEN = `${URL}/profile?token=`;
 // ------------------------------------------------------
 //EDIT PROFILE
 export const UPDATE_PROFILE = `${URL}/profile/edit`;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as url from '../routes';
+import * as url from '../urls';
 
 export const signup = async (formData) => {
   try {

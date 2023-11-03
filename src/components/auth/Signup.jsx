@@ -1,12 +1,9 @@
-import React from 'react';
-import { useState } from 'react';
-import { auth } from './firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import React, { useState } from 'react';
+
 import { Link } from 'react-router-dom';
 
 import { signup } from '../../services/personalApi/auth/signup';
 import { getFormData } from '../../utils/getFormData';
-import axios from 'axios';
 
 function Signup() {
   const [userId, setUserId] = useState('');
@@ -44,7 +41,7 @@ function Signup() {
       />
 
       <div className='relative w-1/2'>
-        <div class="opacity-25  flex items-center justify-center bg-[url('https://bit.ly/login-doodle-patterns')] bg-center bg-no-repeat bg-cover h-screen "></div>
+        <div className="opacity-25  flex items-center justify-center bg-[url('https://bit.ly/login-doodle-patterns')] bg-center bg-no-repeat bg-cover h-screen "></div>
         <form
           className='flex flex-col bg-opacity-40 absolute inset-0 top-28 shadow-2xl border-4 border-[#aaa]  h-min m-10 rounded-xl p-10 bg-[#303030] text-gray-400'
           onSubmit={handleSubmit}
