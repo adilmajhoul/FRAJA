@@ -51,7 +51,7 @@ export default function Login() {
         >
           {isAccountCreated == true && (
             <div className='mb-4 py-2 flex justify-center rounded-md bg-green-700 text-white font-bold text-lg'>
-              {serverMessage || 'Welcome'}
+              {'Welcome'}
             </div>
           )}
 
