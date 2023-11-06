@@ -204,8 +204,9 @@ export default function ProfilePrototype() {
           id="container"
           className="mt-5 py-4 mx-10 flex flex-col  rounded-md border border-gray-600 text-white"
         >
-          {user.collections.map((collection) => (
+          {user.collections.map((collection, key) => (
             <List
+              key={key}
               title={collection.name}
               shows={collection.shows.map((show) => show)}
             />

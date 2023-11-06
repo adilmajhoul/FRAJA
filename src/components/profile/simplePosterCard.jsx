@@ -10,6 +10,7 @@ const imageConfig = {
 };
 
 import { apiKey } from "../../data/apiKey";
+import * as tmdb from "../../services/tmdbApi/tmdb";
 
 export default function SimplePosterCard({ showId }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,21 +29,25 @@ export default function SimplePosterCard({ showId }) {
     return yearString.split("-")[0];
   };
 
-  const fetchData = async () => {
-    try {
-      const res = await axios.get(
-        `https://api.themoviedb.org/3/movie/${showId}?api_key=${apiKey}`,
-      );
-      const data = res.data;
+  // const fetchData = async () => {
+  //   try {
+  //     const res = await axios.get(
+  //       `https://api.themoviedb.org/3/movie/${showId}?api_key=${apiKey}`,
+  //     );
+  //     const data = res.data;
 
-      if (data) {
-        setShow(data);
-      } else {
-        console.error("Invalid API response data");
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+  //     if (data) {
+  //       setShow(data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
+
+  const fetchData = async () => {
+    const data = await tmdb.fetchSingleMovie(showId, apiKey);
+
+    setShow(data);
   };
 
   useEffect(() => {

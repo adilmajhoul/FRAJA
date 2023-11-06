@@ -17,8 +17,8 @@ export default function ListDropDown(props) {
       </div>
       {isListOpen && (
         <div className="flex flex-wrap justify-center">
-          {props.shows.map((showId) => (
-            <SimplePosterCard showId={showId} />
+          {props.shows.map((showId, key) => (
+            <SimplePosterCard key={key} showId={showId} />
           ))}
         </div>
       )}
