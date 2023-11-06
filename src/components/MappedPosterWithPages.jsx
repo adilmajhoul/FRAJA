@@ -17,39 +17,42 @@ import randomFetch from "../utils/randomFetch";
 
 export default function MappedPosterWithInfiniteScroll() {
   const [moviesList, setMoviesList] = useState([]);
-  const { showType, genre } = useParams(); // We keep using genre from params
+  const { showType, genre, page } = useParams();
   const [loading, setLoading] = useState(true);
+
+  const [randomGenre, setRandomGenre] = useAtom(catchRandomGenre);
+  const [randomPage, setRandomPage] = useAtom(catchRandomPage);
+
+  // Initialize random page and genre if not provided
+  useEffect(() => {
+    if (!genre) setRandomGenre(randomFetch("genre"));
+    if (!page) setRandomPage(randomFetch("page"));
+  }, [genre, page]);
+
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(page, 10) || randomPage,
+  );
   const hasMoreData = useRef(true);
 
-  // Atoms
   const [titleFiltering] = useAtom(isTitleFiltering);
   const [minRating] = useAtom(byRatingMin);
   const [maxRating] = useAtom(byRatingMax);
 
-  // Random page and genre management
-  const [randomGenre, setRandomGenre] = useAtom(catchRandomGenre);
-  const [randomPage, setRandomPage] = useAtom(catchRandomPage);
-
-  // Current page management
-  const [currentPage, setCurrentPage] = useState(1);
-
-  // Rating filter function
   function ratingFilter(show) {
     return show.vote_average >= minRating && show.vote_average <= maxRating;
   }
 
-  // Fetch data function
   const fetchData = async () => {
-    setLoading(true); // Set loading to true whenever we start a new fetch
+    setLoading(true);
     try {
       const genreId = genres[genre] || randomGenre;
       const pageToFetch = currentPage || randomPage;
-      const res = await axios.get(
+      const response = await axios.get(
         `https://api.themoviedb.org/3/discover/${
           showType || "movie"
         }?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${genreId}&page=${pageToFetch}`,
       );
-      const data = res.data.results;
+      const data = response.data.results;
 
       if (data.length > 0) {
         setMoviesList((prevMovies) => [
@@ -63,31 +66,19 @@ export default function MappedPosterWithInfiniteScroll() {
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false); // Set loading to false once data is fetched or an error occurs
+      setLoading(false);
     }
   };
 
-  // Initial data fetch and setup
+  // Effect to reset and fetch data when parameters change
   useEffect(() => {
-    // If genre is not specified, get a random one
-    if (!genre) {
-      setRandomGenre(randomFetch("genre"));
-    }
+    setMoviesList([]); // Reset the movies list
+    setCurrentPage(parseInt(page, 10) || 1); // Reset the current page
+    hasMoreData.current = true; // Ensure we can fetch more data
+    fetchData(); // Fetch new data
+  }, [genre, page, showType, minRating, maxRating]);
 
-    // If page is not specified, get a random one
-    setRandomPage(randomFetch("page"));
-
-    // Reset the movies list and current page whenever the genre or showType changes
-    setMoviesList([]);
-    setCurrentPage(1);
-    hasMoreData.current = true;
-
-    fetchData(); // Fetch initial data
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [genre, showType]);
-
-  // Component UI
+  // Loading state UI
   if (loading) {
     return <h4 className="text-white">Loading...</h4>;
   }
@@ -103,7 +94,7 @@ export default function MappedPosterWithInfiniteScroll() {
         >
           <div className="flex flex-wrap justify-center">
             {moviesList.map((show, idx) => (
-              <PosterCard show={show} key={show.id || idx} />
+              <PosterCard show={show} key={show.id || idx} /> // Use show.id when available for a stable key
             ))}
           </div>
         </InfiniteScroll>
