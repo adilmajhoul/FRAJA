@@ -1,0 +1,5 @@
+// getFriends
+
+// addFriend
+
+// deleteFriend

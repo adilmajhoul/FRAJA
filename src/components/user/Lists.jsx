@@ -1,3 +1,0 @@
-favorites
-watch later
-watched

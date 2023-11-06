@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-
-import { Link } from 'react-router-dom';
-
-import { login } from '../../services/personalApi/auth/login';
-import { getFormData } from '../../utils/getFormData';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../services/personalApi/auth/login";
+import { getFormData } from "../../utils/getFormData";
+import { useAtom } from "jotai";
+import { CURRENT_USER } from "../profile/profileAtoms";
 
 export default function Login() {
-  const [userId, setUserId] = useState('');
+  const [currentUser, setCurrentUser] = useAtom(CURRENT_USER);
+  const [userId, setUserId] = useState("");
   const [isAccountCreated, setIsAccountCreated] = useState(undefined);
+  const [serverMessage, setServerMessage] = useState("");
 
-  const [serverMessage, setServerMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,11 +21,18 @@ export default function Login() {
       const res = await login(formData);
 
       if (res._id) {
-        console.log('login successful:', res);
+        console.log("login successful:", res);
         setIsAccountCreated(true);
 
+        // set current user _id in global state
+        setCurrentUser(res._id);
+
         // set jwt token in local storage
-        localStorage.setItem('frajaToken', res.token);
+
+        localStorage.setItem("currentUser", res._id);
+        localStorage.setItem("frajaToken", res.token);
+
+        navigate(`/profile/${res._id}`);
       } else {
         console.log(res.data);
         setIsAccountCreated(false);
@@ -31,63 +40,68 @@ export default function Login() {
         setServerMessage(res.data);
       }
     } catch (error) {
-      console.error('login failed:', error.message);
+      console.error("login failed:", error.message);
     }
   };
 
   return (
-    <div className='min-h-screen flex items-center'>
+    <div className="min-h-screen flex items-center">
       <img
-        className='opacity-50 h-screen object-cover w-1/2'
-        src='https://picjumbo.com/wp-content/uploads/young-woman-watching-tv-and-eating-popcorn-at-night-free-photo.jpg'
-        alt=''
+        className="opacity-50 h-screen object-cover w-1/2"
+        src="https://picjumbo.com/wp-content/uploads/young-woman-watching-tv-and-eating-popcorn-at-night-free-photo.jpg"
+        alt=""
       />
 
-      <div className='relative w-1/2'>
+      <div className="relative w-1/2">
         <div className="opacity-25  flex items-center justify-center bg-[url('https://bit.ly/login-doodle-patterns')] bg-center bg-no-repeat bg-cover h-screen "></div>
         <form
-          className='flex flex-col bg-opacity-40 absolute inset-0 top-28 shadow-2xl border-4 border-[#aaa]  h-min m-10 rounded-xl p-10 bg-[#303030] text-gray-400'
+          className="flex flex-col bg-opacity-40 absolute inset-0 top-28 shadow-2xl border-4 border-[#aaa]  h-min m-10 rounded-xl p-10 bg-[#303030] text-gray-400"
           onSubmit={handleSubmit}
         >
           {isAccountCreated == true && (
-            <div className='mb-4 py-2 flex justify-center rounded-md bg-green-700 text-white font-bold text-lg'>
-              {'Welcome'}
+            <div className="mb-4 py-2 flex justify-center rounded-md bg-green-700 text-white font-bold text-lg">
+              {"Welcome"}
             </div>
           )}
 
           {isAccountCreated == false && (
-            <div className='mb-4 py-2 flex justify-center rounded-md bg-red-800 text-white font-bold text-lg'>
-              {serverMessage || 'something happened try again please'}
+            <div className="mb-4 py-2 flex justify-center rounded-md bg-red-800 text-white font-bold text-lg">
+              {serverMessage || "something happened try again please"}
             </div>
           )}
 
-          <label className='text-xl font-bold text-[#aaa]'>Email address</label>
+          <label className="text-xl font-bold text-[#aaa]">Email address</label>
           <input
-            className='mb-4 focus:outline-none px-2 py-1 rounded-md focus:ring-2 focus:ring-red-600'
-            type='email'
-            name='email'
-            placeholder='Email'
+            className="mb-4 focus:outline-none px-2 py-1 rounded-md focus:ring-2 focus:ring-red-600"
+            type="email"
+            name="email"
+            placeholder="Email"
           />
 
-          <label className='text-xl font-bold text-[#aaa]'>Password</label>
+          <label className="text-xl font-bold text-[#aaa]">Password</label>
           <input
-            className='mb-5 focus:outline-none px-2 py-1 rounded-md focus:ring-2 focus:ring-red-600'
-            type='password'
-            name='password'
-            placeholder='Password'
+            className="mb-5 focus:outline-none px-2 py-1 rounded-md focus:ring-2 focus:ring-red-600"
+            type="password"
+            name="password"
+            placeholder="Password"
           />
 
           <button
-            type='submit'
-            className='mb-4 flex w-full justify-center rounded-md bg-red-600 py-1.5 font-semibold text-white active:border-4 active:bg-transparent active:border-red-600 text-xl'
+            type="submit"
+            className="mb-4 flex w-full justify-center rounded-md bg-red-600 py-1.5 font-semibold text-white active:border-4 active-bg-transparent active-border-red-600 text-xl"
           >
+            {/* {currentUser ? (
+              <Link to={`profile/${currentUser}`}>Login</Link>
+            ) : (
+              "Logging in..."
+            )} */}
             Login
           </button>
 
-          <span className='text-white'>
+          <span className="text-white">
             You Don't Have An Account ?
-            <span className='p-1 rounded-md cursor-pointer font-semibold text-lg ml-4 text-red-600  active:bg-red-600 active:text-white'>
-              <Link to='/signup'> Create One Here</Link>
+            <span className="p-1 rounded-md cursor-pointer font-semibold text-lg ml-4 text-red-600  active:bg-red-600 active:text-white">
+              <Link to="/signup"> Create One Here</Link>
             </span>
           </span>
         </form>
@@ -102,6 +116,7 @@ export default function Login() {
 
 // import { getFormData } from '../../utils/getFormData';
 // import { login } from '../../services/personalApi/auth/login';
+import { currentUser } from "./authAtoms";
 
 // export default function Login() {
 //   const [userId, setUserId] = useState('');

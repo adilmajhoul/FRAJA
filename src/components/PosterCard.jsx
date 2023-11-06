@@ -58,8 +58,11 @@ function PosterCard({ show }) {
                 <div className='flex flex-col text-sm font-semibold'>
                   {/* genres ----------------------------------------- */}
                   <div className=' flex flex-col items-end'>
-                    {getGenres(show.genre_ids).map((genre) => (
-                      <span className='whitespace-nowrap h-fit rounded-full my-[1px]  px-[3px] text-black bg-[#ffcc26] w-min'>
+                    {getGenres(show.genre_ids).map((genre, key) => (
+                      <span
+                        key={key}
+                        className='whitespace-nowrap h-fit rounded-full my-[1px]  px-[3px] text-black bg-[#ffcc26] w-min'
+                      >
                         {genre}
                       </span>
                     ))}

@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import { isTokenAllowed } from '../../services/personalApi/auth/isTokenAllowed';
+import { useEffect, useState } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { isTokenAllowed } from "../../services/personalApi/auth/isTokenAllowed";
 
 export default function ProtectedRoute() {
-  const [token, setToken] = useState(localStorage.getItem('frajaToken'));
+  const [token, setToken] = useState(localStorage.getItem("frajaToken"));
   const [isLoading, setIsLoading] = useState(true);
   const [isAllowed, setIsAllowed] = useState(false);
 
@@ -28,5 +28,5 @@ export default function ProtectedRoute() {
     return <Outlet />;
   }
 
-  return <Navigate to='/' />;
+  return <Navigate to="/" />;
 }

@@ -1,3 +1,5 @@
+const TMDB_URL = 'https://api.themoviedb.org/3';
+
 const URL = 'https://fraja-movies-english-api.vercel.app/api';
 
 // const URL = 'http://localhost:3000/api';
