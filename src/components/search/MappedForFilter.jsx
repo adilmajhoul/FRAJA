@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useParams } from "react-router-dom";
 
-import axios from 'axios';
-import { apiAuthToken } from '../../data/apiAuthToken';
+import axios from "axios";
+import { apiAuthToken } from "../../data/apiAuthToken";
 
-import PosterCard from '../PosterCard';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import PosterCard from "../posterCard/PosterCard";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-import { useAtom } from 'jotai';
+import { useAtom } from "jotai";
 import {
   isTitleFiltering,
   shows,
@@ -15,7 +15,7 @@ import {
   title_query,
   byRatingMin,
   byRatingMax,
-} from './atoms';
+} from "./atoms";
 
 export default function MappedForFilter() {
   const [moviesList, setMoviesList] = useState([]);
@@ -63,16 +63,16 @@ export default function MappedForFilter() {
   // ------------------
   async function fetchData(query) {
     const options = {
-      method: 'GET',
-      url: 'https://api.themoviedb.org/3/search/movie',
+      method: "GET",
+      url: "https://api.themoviedb.org/3/search/movie",
       params: {
         query: `${query}`,
-        include_adult: 'false',
+        include_adult: "false",
         // language: 'en-US',
         page: `${currentPage}`,
       },
       headers: {
-        accept: 'application/json',
+        accept: "application/json",
         Authorization: `Bearer ${apiAuthToken}`,
       },
     };
@@ -110,15 +110,15 @@ export default function MappedForFilter() {
 
   return (
     <div>
-      <span className='text-white'>filtered shows</span>
+      <span className="text-white">filtered shows</span>
 
       <InfiniteScroll
         dataLength={setShowsList.length}
         next={fetchData}
         hasMore={hasMoreData.current}
-        loader={<h4 className='text-white'>Loading...</h4>}
+        loader={<h4 className="text-white">Loading...</h4>}
       >
-        <div className='flex flex-wrap justify-center'>
+        <div className="flex flex-wrap justify-center">
           {showsList.map((show, idx) => (
             <PosterCard show={show} key={idx} />
           ))}

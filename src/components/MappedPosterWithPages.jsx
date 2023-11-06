@@ -1,113 +1,112 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
-
-import axios from 'axios';
-import PosterCard from './PosterCard';
-import InfiniteScroll from 'react-infinite-scroll-component';
-
-import { useAtom } from 'jotai';
+import React, { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import PosterCard from "./posterCard/PosterCard";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useAtom } from "jotai";
 import {
   isTitleFiltering,
   byRatingMin,
   byRatingMax,
   catchRandomGenre,
   catchRandomPage,
-} from './search/atoms';
-
-import { englishGenresNameFirst as genres } from '../data/englishGenresNameFirst';
-import { apiKey } from '../data/apiKey';
-
-import randomFetch from '../utils/randomFetch';
+} from "./search/atoms";
+import { englishGenresNameFirst as genres } from "../data/englishGenresNameFirst";
+import { apiKey } from "../data/apiKey";
+import randomFetch from "../utils/randomFetch";
 
 export default function MappedPosterWithInfiniteScroll() {
   const [moviesList, setMoviesList] = useState([]);
-  const { showType, genre, page } = useParams();
+  const { showType, genre } = useParams(); // We keep using genre from params
   const [loading, setLoading] = useState(true);
-
-  // --------------------
-
-  // --------------------
-  // set up random page and genre
-  const [randomGenre, setRandomGenre] = useAtom(
-    catchRandomGenre === '' ? randomFetch('genre') : catchRandomGenre
-  );
-  const [randomPage, setRandomPage] = useAtom(
-    catchRandomGenre === '' ? randomFetch('page') : catchRandomGenre
-  );
-
-  // set up random page and genre
-  useEffect(() => {
-    setRandomPage(randomFetch('page'));
-    setRandomGenre(randomFetch('genre'));
-  }, []);
-
-  const [currentPage, setCurrentPage] = useState(parseInt(page) || randomPage);
-  // --------------------
-
   const hasMoreData = useRef(true);
 
-  const [titleFiltering, setTitleFiltering] = useAtom(isTitleFiltering);
-  // --------------------
-  const [minRating, setMinRating] = useAtom(byRatingMin);
-  const [maxRating, setMaxRating] = useAtom(byRatingMax);
+  // Atoms
+  const [titleFiltering] = useAtom(isTitleFiltering);
+  const [minRating] = useAtom(byRatingMin);
+  const [maxRating] = useAtom(byRatingMax);
+
+  // Random page and genre management
+  const [randomGenre, setRandomGenre] = useAtom(catchRandomGenre);
+  const [randomPage, setRandomPage] = useAtom(catchRandomPage);
+
+  // Current page management
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Rating filter function
   function ratingFilter(show) {
     return show.vote_average >= minRating && show.vote_average <= maxRating;
   }
-  // --------------------
+
+  // Fetch data function
   const fetchData = async () => {
+    setLoading(true); // Set loading to true whenever we start a new fetch
     try {
+      const genreId = genres[genre] || randomGenre;
+      const pageToFetch = currentPage || randomPage;
       const res = await axios.get(
         `https://api.themoviedb.org/3/discover/${
-          showType || 'movie'
-        }?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${
-          genres[genre] || randomGenre
-        }&page=${currentPage}`
+          showType || "movie"
+        }?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${genreId}&page=${pageToFetch}`,
       );
       const data = res.data.results;
 
       if (data.length > 0) {
         setMoviesList((prevMovies) => [
           ...prevMovies,
-          ...data.filter((show) => ratingFilter(show)),
+          ...data.filter(ratingFilter),
         ]);
-
-        setCurrentPage(currentPage + 1);
+        setCurrentPage((prevPage) => prevPage + 1);
       } else {
         hasMoreData.current = false;
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false); // Set loading to false once data is fetched or an error occurs
     }
   };
-  // --------------------
+
+  // Initial data fetch and setup
   useEffect(() => {
-    setCurrentPage(parseInt(page) || 1);
-    setMoviesList([]); // Reset the movies list when the genre or page changes
-    hasMoreData.current = true; // Reset hasMoreData to true
+    // If genre is not specified, get a random one
+    if (!genre) {
+      setRandomGenre(randomFetch("genre"));
+    }
 
-    fetchData();
+    // If page is not specified, get a random one
+    setRandomPage(randomFetch("page"));
 
-    console.log('genre:', genre, 'page:', page, 'showType:', showType);
-  }, [genre, page, showType, minRating, maxRating]);
-  // --------------------
+    // Reset the movies list and current page whenever the genre or showType changes
+    setMoviesList([]);
+    setCurrentPage(1);
+    hasMoreData.current = true;
+
+    fetchData(); // Fetch initial data
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [genre, showType]);
+
+  // Component UI
+  if (loading) {
+    return <h4 className="text-white">Loading...</h4>;
+  }
+
   return (
     <div>
       {!titleFiltering && (
-        <div>
-          <span className='text-white'>default shows</span>
-          <InfiniteScroll
-            dataLength={moviesList.length}
-            next={fetchData}
-            hasMore={hasMoreData.current}
-            loader={<h4 className='text-white'>Loading...</h4>}
-          >
-            <div className='flex flex-wrap justify-center'>
-              {moviesList.map((show, idx) => (
-                <PosterCard show={show} key={idx} />
-              ))}
-            </div>
-          </InfiniteScroll>
-        </div>
+        <InfiniteScroll
+          dataLength={moviesList.length}
+          next={fetchData}
+          hasMore={hasMoreData.current}
+          loader={<h4 className="text-white">Loading...</h4>}
+        >
+          <div className="flex flex-wrap justify-center">
+            {moviesList.map((show, idx) => (
+              <PosterCard show={show} key={show.id || idx} />
+            ))}
+          </div>
+        </InfiniteScroll>
       )}
     </div>
   );
