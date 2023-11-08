@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 
 import axios from "axios";
-import PosterCard from "./posterCard/PosterCard";
+import PosterCard from "../posterCard/PosterCard";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { useAtom } from "jotai";
@@ -12,12 +12,12 @@ import {
   byRatingMax,
   catchRandomGenre,
   catchRandomPage,
-} from "./search/atoms";
+} from "../search/atoms";
 
-import { englishGenresNameFirst as genres } from "../data/englishGenresNameFirst";
-import { apiKey } from "../data/apiKey";
+import { englishGenresNameFirst as genres } from "../../data/englishGenresNameFirst";
+import { apiKey } from "../../data/apiKey";
 
-import randomFetch from "../utils/randomFetch";
+import randomFetch from "../../utils/randomFetch";
 
 export default function MappedPosterWithInfiniteScroll() {
   const [moviesList, setMoviesList] = useState([]);

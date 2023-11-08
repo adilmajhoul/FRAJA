@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Routes, Route, Link, useParams } from "react-router-dom"; // Import Link component
 import { englishGenresNameFirst as genres } from "../../data/englishGenresNameFirst";
 
-import MappedPosterWithPages from "../MappedPosterWithPages";
+import MappedPosterWithPages from "../mappedPoster/MappedPosterWithPages";
 
 import Search from "../search/Search";
 import Login from "../auth/Login";
