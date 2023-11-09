@@ -14,7 +14,7 @@ const imageConfig = {
 
 import { useAtom } from "jotai";
 import { catchRandomGenre, catchRandomPage } from "../search/atoms";
-import PosterCardMore from "./posterCardMore";
+import PosterCardMiniDropdown from "../profile/posterCardMiniDropdown";
 
 function PosterCard({ show }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,8 +59,8 @@ function PosterCard({ show }) {
                 <div className="flex flex-col text-sm font-semibold">
                   {/* genres ----------------------------------------- */}
                   <div className="flex justify-between">
-                    <div>
-                      <PosterCardMore />
+                    <div onClick={(e) => e.preventDefault()}>
+                      <PosterCardMiniDropdown />
                     </div>
                     <div className=" flex flex-col items-end">
                       {getGenres(show.genre_ids).map((genre, key) => (

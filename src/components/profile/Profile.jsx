@@ -5,111 +5,12 @@ import * as collection from "../../services/personalApi/collection/collection.js
 export default function ProfilePrototype() {
   const [isListOpen, setIsListOpen] = useState(true);
 
-  //TODO: build prototype (without fetching ) around this user object
-  // ask gpt whats the best strategy for storing user data
-  // should i fetch it everytime he inters to his profile or i should cache it
-  // fetch is easy though no complexity over head
-  // const currentUser = {
-  //   _id: "654170e693dc3bcf415f9a02",
-  //   name: "adil ma",
-  //   password: "$2b$10$VFqUKUZFDhYrS/TnhWTy8Oh5g3.4DcBSOD4nhBBYQKgsHihAe5nV2",
-  //   email: "adil1@gmail.com",
-  //   watched: [
-  //     {
-  //       _id: "6545a0ab151f3b9529ca116e",
-  //       tmdbId: "parasite",
-  //       comments: [],
-  //       createdAt: "2023-11-04T01:38:51.789Z",
-  //       updatedAt: "2023-11-04T01:38:51.789Z",
-  //       __v: 0,
-  //     },
-  //   ],
-  //   watchLater: [
-  //     {
-  //       _id: "6545a053151f3b9529ca1159",
-  //       tmdbId: "the expanse",
-  //       comments: [],
-  //       createdAt: "2023-11-04T01:37:23.088Z",
-  //       updatedAt: "2023-11-04T01:37:23.088Z",
-  //       __v: 0,
-  //     },
-  //   ],
-  //   // -----------------------
-  //   collections: [
-  //     {
-  //       name: "my secret collection",
-  //       isPublic: false,
+  // TODO: should i store user id in local storage ?
 
-  //       shows: [
-  //         {
-  //           _id: "6545a069151f3b9529ca1160",
-  //           tmdbId: "437109",
-  //           comments: [],
-  //           createdAt: "2023-11-04T01:37:45.029Z",
-  //           updatedAt: "2023-11-04T01:37:45.029Z",
-  //           __v: 0,
-  //         },
-  //         {
-  //           _id: "6545a069151f3b9529ca1160",
-  //           tmdbId: "629017",
-  //           comments: [],
-  //           createdAt: "2023-11-04T01:37:45.029Z",
-  //           updatedAt: "2023-11-04T01:37:45.029Z",
-  //           __v: 0,
-  //         },
-  //         {
-  //           _id: "6545a069151f3b9529ca1160",
-  //           tmdbId: "762968",
-  //           comments: [],
-  //           createdAt: "2023-11-04T01:37:45.029Z",
-  //           updatedAt: "2023-11-04T01:37:45.029Z",
-  //           __v: 0,
-  //         },
-  //       ],
-  //     },
-  //   ],
-  //   // -------------------------
-  //   comments: [],
-  //   friends: [],
-  //   history: [],
-  //   createdAt: "2023-10-31T21:25:58.321Z",
-  //   updatedAt: "2023-11-04T01:38:52.076Z",
-  //   __v: 3,
-  // };
-  // // ---------------------------------------------------------------------------------------
-  // const user = {
-  //   collections: [
-  //     {
-  //       name: "my secret collection",
-  //       isPublic: false,
-  //       shows: [
-  //         "437109",
-  //         "629017",
-  //         "437109",
-  //         "437109",
-  //         "629017",
-  //         "437109",
-  //         "437109",
-  //         "629017",
-  //         "437109",
-  //         "437109",
-  //         "629017",
-  //         "437109",
-  //       ],
-  //     },
-  //     {
-  //       name: "my public collection",
-  //       isPublic: false,
-  //       shows: ["629017", "437109"],
-  //     },
-  //   ],
-  // };
   const [collections, setCollections] = useState([]);
 
   const fetchCollections = async () => {
     const coll = await collection.getUserCollections();
-
-    console.log("coll ->", coll);
 
     setCollections(coll);
   };

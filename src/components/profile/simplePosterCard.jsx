@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { englishGenresIdFirst } from "../../data/englishGenresIdFirst";
-import axios from "axios";
 
 const imageConfig = {
   base_url: "http://image.tmdb.org/t/p/",
@@ -21,28 +20,9 @@ export default function SimplePosterCard({ showId }) {
     return `${imageConfig.base_url}${imageConfig.poster_sizes[3]}${posterId}`;
   };
 
-  const getGenres = (ids) => {
-    return ids.map((id) => englishGenresIdFirst[id]);
-  };
-
   const parseYear = (yearString) => {
     return yearString.split("-")[0];
   };
-
-  // const fetchData = async () => {
-  //   try {
-  //     const res = await axios.get(
-  //       `https://api.themoviedb.org/3/movie/${showId}?api_key=${apiKey}`,
-  //     );
-  //     const data = res.data;
-
-  //     if (data) {
-  //       setShow(data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
 
   const fetchData = async () => {
     const data = await tmdb.fetchSingleMovie(showId, apiKey);
@@ -53,6 +33,8 @@ export default function SimplePosterCard({ showId }) {
   useEffect(() => {
     fetchData();
   }, [showId]);
+
+  const handleAddShowToCollection = () => {};
 
   return (
     <Link

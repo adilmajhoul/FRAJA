@@ -10,13 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@coreui/react": "^5.0.0-beta.1",
     "@tanstack/react-query": "^4.36.1",
+    "autoprefixer": "^10.4.16",
     "axios": "^1.5.1",
     "browserify": "^17.0.0",
     "dotenv": "^16.3.1",
     "firebase": "^10.5.0",
+    "flowbite-react": "^0.6.4",
     "jotai": "^2.4.3",
     "multi-range-slider-react": "^2.0.5",
+    "postcss": "^8.4.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
