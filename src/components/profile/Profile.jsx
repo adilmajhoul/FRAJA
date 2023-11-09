@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-// ---------------------
-import { AiOutlineArrowDown } from "react-icons/ai";
-// ---------------------
 import List from "./micro components/List";
-import axios from "axios";
+import * as collection from "../../services/personalApi/collection/collection.js";
 export default function ProfilePrototype() {
   const [isListOpen, setIsListOpen] = useState(true);
 
@@ -12,109 +9,114 @@ export default function ProfilePrototype() {
   // ask gpt whats the best strategy for storing user data
   // should i fetch it everytime he inters to his profile or i should cache it
   // fetch is easy though no complexity over head
-  const currentUser = {
-    _id: "654170e693dc3bcf415f9a02",
-    name: "adil ma",
-    password: "$2b$10$VFqUKUZFDhYrS/TnhWTy8Oh5g3.4DcBSOD4nhBBYQKgsHihAe5nV2",
-    email: "adil1@gmail.com",
-    watched: [
-      {
-        _id: "6545a0ab151f3b9529ca116e",
-        tmdbId: "parasite",
-        comments: [],
-        createdAt: "2023-11-04T01:38:51.789Z",
-        updatedAt: "2023-11-04T01:38:51.789Z",
-        __v: 0,
-      },
-    ],
-    watchLater: [
-      {
-        _id: "6545a053151f3b9529ca1159",
-        tmdbId: "the expanse",
-        comments: [],
-        createdAt: "2023-11-04T01:37:23.088Z",
-        updatedAt: "2023-11-04T01:37:23.088Z",
-        __v: 0,
-      },
-    ],
-    // -----------------------
-    collections: [
-      {
-        name: "my secret collection",
-        isPublic: false,
+  // const currentUser = {
+  //   _id: "654170e693dc3bcf415f9a02",
+  //   name: "adil ma",
+  //   password: "$2b$10$VFqUKUZFDhYrS/TnhWTy8Oh5g3.4DcBSOD4nhBBYQKgsHihAe5nV2",
+  //   email: "adil1@gmail.com",
+  //   watched: [
+  //     {
+  //       _id: "6545a0ab151f3b9529ca116e",
+  //       tmdbId: "parasite",
+  //       comments: [],
+  //       createdAt: "2023-11-04T01:38:51.789Z",
+  //       updatedAt: "2023-11-04T01:38:51.789Z",
+  //       __v: 0,
+  //     },
+  //   ],
+  //   watchLater: [
+  //     {
+  //       _id: "6545a053151f3b9529ca1159",
+  //       tmdbId: "the expanse",
+  //       comments: [],
+  //       createdAt: "2023-11-04T01:37:23.088Z",
+  //       updatedAt: "2023-11-04T01:37:23.088Z",
+  //       __v: 0,
+  //     },
+  //   ],
+  //   // -----------------------
+  //   collections: [
+  //     {
+  //       name: "my secret collection",
+  //       isPublic: false,
 
-        shows: [
-          {
-            _id: "6545a069151f3b9529ca1160",
-            tmdbId: "437109",
-            comments: [],
-            createdAt: "2023-11-04T01:37:45.029Z",
-            updatedAt: "2023-11-04T01:37:45.029Z",
-            __v: 0,
-          },
-          {
-            _id: "6545a069151f3b9529ca1160",
-            tmdbId: "629017",
-            comments: [],
-            createdAt: "2023-11-04T01:37:45.029Z",
-            updatedAt: "2023-11-04T01:37:45.029Z",
-            __v: 0,
-          },
-          {
-            _id: "6545a069151f3b9529ca1160",
-            tmdbId: "762968",
-            comments: [],
-            createdAt: "2023-11-04T01:37:45.029Z",
-            updatedAt: "2023-11-04T01:37:45.029Z",
-            __v: 0,
-          },
-        ],
-      },
-    ],
-    // -------------------------
-    comments: [],
-    friends: [],
-    history: [],
-    createdAt: "2023-10-31T21:25:58.321Z",
-    updatedAt: "2023-11-04T01:38:52.076Z",
-    __v: 3,
-  };
-  // ---------------------------------------------------------------------------------------
-  const user = {
-    collections: [
-      {
-        name: "my secret collection",
-        isPublic: false,
-        shows: [
-          "437109",
-          "629017",
-          "437109",
-          "437109",
-          "629017",
-          "437109",
-          "437109",
-          "629017",
-          "437109",
-          "437109",
-          "629017",
-          "437109",
-        ],
-      },
-      {
-        name: "my public collection",
-        isPublic: false,
-        shows: ["629017", "437109"],
-      },
-    ],
-  };
-  const [collections, setCollections] = useState();
-
-  // const extractCollections = (user) => {
-  //   const collections = user.collections.map((collection) => {});
-
-  //   return [name, collections];
+  //       shows: [
+  //         {
+  //           _id: "6545a069151f3b9529ca1160",
+  //           tmdbId: "437109",
+  //           comments: [],
+  //           createdAt: "2023-11-04T01:37:45.029Z",
+  //           updatedAt: "2023-11-04T01:37:45.029Z",
+  //           __v: 0,
+  //         },
+  //         {
+  //           _id: "6545a069151f3b9529ca1160",
+  //           tmdbId: "629017",
+  //           comments: [],
+  //           createdAt: "2023-11-04T01:37:45.029Z",
+  //           updatedAt: "2023-11-04T01:37:45.029Z",
+  //           __v: 0,
+  //         },
+  //         {
+  //           _id: "6545a069151f3b9529ca1160",
+  //           tmdbId: "762968",
+  //           comments: [],
+  //           createdAt: "2023-11-04T01:37:45.029Z",
+  //           updatedAt: "2023-11-04T01:37:45.029Z",
+  //           __v: 0,
+  //         },
+  //       ],
+  //     },
+  //   ],
+  //   // -------------------------
+  //   comments: [],
+  //   friends: [],
+  //   history: [],
+  //   createdAt: "2023-10-31T21:25:58.321Z",
+  //   updatedAt: "2023-11-04T01:38:52.076Z",
+  //   __v: 3,
   // };
+  // // ---------------------------------------------------------------------------------------
+  // const user = {
+  //   collections: [
+  //     {
+  //       name: "my secret collection",
+  //       isPublic: false,
+  //       shows: [
+  //         "437109",
+  //         "629017",
+  //         "437109",
+  //         "437109",
+  //         "629017",
+  //         "437109",
+  //         "437109",
+  //         "629017",
+  //         "437109",
+  //         "437109",
+  //         "629017",
+  //         "437109",
+  //       ],
+  //     },
+  //     {
+  //       name: "my public collection",
+  //       isPublic: false,
+  //       shows: ["629017", "437109"],
+  //     },
+  //   ],
+  // };
+  const [collections, setCollections] = useState([]);
 
+  const fetchCollections = async () => {
+    const coll = await collection.getUserCollections();
+
+    console.log("coll ->", coll);
+
+    setCollections(coll);
+  };
+
+  useEffect(() => {
+    fetchCollections();
+  }, []);
   return (
     <div>
       <div className="mx-10 rounded-md border border-gray-600 bg-[#393939] text-white">
@@ -204,7 +206,7 @@ export default function ProfilePrototype() {
           id="container"
           className="mt-5 py-4 mx-10 flex flex-col  rounded-md border border-gray-600 text-white"
         >
-          {user.collections.map((collection, key) => (
+          {collections.map((collection, key) => (
             <List
               key={key}
               title={collection.name}

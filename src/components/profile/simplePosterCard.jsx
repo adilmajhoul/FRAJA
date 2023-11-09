@@ -94,8 +94,9 @@ export default function SimplePosterCard({ showId }) {
                     </span>
 
                     <span className="whitespace-nowrap w-fit h-fit rounded-full my-[1px] py-[1px] px-[3px] text-black bg-[#ffcc26] w-min">
-                      Year:{" "}
-                      {parseYear(show.release_date || show.first_air_date)}
+                      Year:
+                      {(show.release_date || show.first_air_date) &&
+                        parseYear(show.release_date || show.first_air_date)}
                     </span>
                   </div>
                 </div>
