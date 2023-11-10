@@ -14,12 +14,25 @@ const imageConfig = {
 
 import { useAtom } from "jotai";
 import { catchRandomGenre, catchRandomPage } from "../search/atoms";
-import PosterCardMiniDropdown from "../profile/posterCardMiniDropdown";
+import PosterCardMiniDropdown from "./posterCardMiniDropdown";
+
+import { clickedShowId } from "./posterCardAtoms";
 
 function PosterCard({ show }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const { genre, page, showType } = useParams();
+
+  const [currentClickedShowId, setCurrentClickedShowId] =
+    useAtom(clickedShowId);
+
+  function handleClickMore(e) {
+    e.preventDefault();
+
+    setCurrentClickedShowId(show.id);
+
+    console.log("currentClickedShowId -->", show.id);
+  }
 
   function getPoster(posterId) {
     return `${imageConfig.base_url}/${imageConfig.poster_sizes[3]}${posterId}`;
@@ -59,7 +72,7 @@ function PosterCard({ show }) {
                 <div className="flex flex-col text-sm font-semibold">
                   {/* genres ----------------------------------------- */}
                   <div className="flex justify-between">
-                    <div onClick={(e) => e.preventDefault()}>
+                    <div onClick={(e) => handleClickMore(e)}>
                       <PosterCardMiniDropdown />
                     </div>
                     <div className=" flex flex-col items-end">

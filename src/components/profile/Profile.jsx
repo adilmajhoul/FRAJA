@@ -2,8 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import List from "./micro components/List";
 import * as collection from "../../services/personalApi/collection/collection.js";
+import { useAtom } from "jotai";
+import { reRenderCollections } from "./profileAtoms";
+
 export default function ProfilePrototype() {
   const [isListOpen, setIsListOpen] = useState(true);
+
+  const [renderCollections, setRenderCollections] =
+    useAtom(reRenderCollections);
 
   // TODO: should i store user id in local storage ?
 
@@ -17,7 +23,7 @@ export default function ProfilePrototype() {
 
   useEffect(() => {
     fetchCollections();
-  }, []);
+  }, [renderCollections]);
   return (
     <div>
       <div className="mx-10 rounded-md border border-gray-600 bg-[#393939] text-white">

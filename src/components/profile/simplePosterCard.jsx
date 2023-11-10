@@ -11,10 +11,17 @@ const imageConfig = {
 import { apiKey } from "../../data/apiKey";
 import * as tmdb from "../../services/tmdbApi/tmdb";
 
+import { useAtom } from "jotai";
+import PosterCardMiniDropdown from "../posterCard/posterCardMiniDropdown";
+import { clickedShowId } from "../posterCard/posterCardAtoms";
+
 export default function SimplePosterCard({ showId }) {
   const [isOpen, setIsOpen] = useState(false);
   const { genre, page, showType } = useParams();
   const [show, setShow] = useState(null);
+
+  const [currentClickedShowId, setCurrentClickedShowId] =
+    useAtom(clickedShowId);
 
   const getPoster = (posterId) => {
     return `${imageConfig.base_url}${imageConfig.poster_sizes[3]}${posterId}`;
@@ -35,6 +42,14 @@ export default function SimplePosterCard({ showId }) {
   }, [showId]);
 
   const handleAddShowToCollection = () => {};
+
+  function handleClickMore(e) {
+    e.preventDefault();
+
+    setCurrentClickedShowId(show.id);
+
+    console.log("currentClickedShowId -->", show.id);
+  }
 
   return (
     <Link
@@ -57,29 +72,35 @@ export default function SimplePosterCard({ showId }) {
             <div className="h-full flex-col rounded-xl bg-red-900 bg-opacity-0 text-sm font-semibold text-white group-hover:bg-opacity-70">
               <div className="p-2 flex h-full flex-col justify-between">
                 <div className="flex flex-col text-sm font-semibold">
-                  <div className="flex flex-col items-end">
-                    {show.genres?.map((genre) => (
-                      <span
-                        key={genre.id}
-                        className="whitespace-nowrap h-fit rounded-full my-[1px] px-[3px] text-black bg-[#ffcc26] w-min"
-                      >
-                        {englishGenresIdFirst[genre.id]}
+                  {/* --------------------- */}
+                  <div className="flex justify-between">
+                    <div onClick={(e) => handleClickMore(e)}>
+                      <PosterCardMiniDropdown />
+                    </div>
+                    <div className="flex flex-col items-end">
+                      {show.genres?.map((genre) => (
+                        <span
+                          key={genre.id}
+                          className="whitespace-nowrap h-fit rounded-full my-[1px] px-[3px] text-black bg-[#ffcc26] w-min"
+                        >
+                          {englishGenresIdFirst[genre.id]}
+                        </span>
+                      ))}
+
+                      <span className="whitespace-nowrap w-fit h-fit rounded-full my-[1px] py-[1px] px-[3px] text-black bg-[#ffcc26] w-min">
+                        Votes: {show.vote_count}
                       </span>
-                    ))}
 
-                    <span className="whitespace-nowrap w-fit h-fit rounded-full my-[1px] py-[1px] px-[3px] text-black bg-[#ffcc26] w-min">
-                      Votes: {show.vote_count}
-                    </span>
+                      <span className="whitespace-nowrap flex items-center h-min rounded-full my-[1px] py-[1px] px-[3px] font-extrabold text-black bg-[#ffcc26] w-min">
+                        {show.vote_average}
+                      </span>
 
-                    <span className="whitespace-nowrap flex items-center h-min rounded-full my-[1px] py-[1px] px-[3px] font-extrabold text-black bg-[#ffcc26] w-min">
-                      {show.vote_average}
-                    </span>
-
-                    <span className="whitespace-nowrap w-fit h-fit rounded-full my-[1px] py-[1px] px-[3px] text-black bg-[#ffcc26] w-min">
-                      Year:
-                      {(show.release_date || show.first_air_date) &&
-                        parseYear(show.release_date || show.first_air_date)}
-                    </span>
+                      <span className="whitespace-nowrap w-fit h-fit rounded-full my-[1px] py-[1px] px-[3px] text-black bg-[#ffcc26] w-min">
+                        Year:
+                        {(show.release_date || show.first_air_date) &&
+                          parseYear(show.release_date || show.first_air_date)}
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div className="w-full px-2 pb-4 flex justify-center text-left text-xl font-extrabold">

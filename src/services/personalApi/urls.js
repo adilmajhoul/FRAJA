@@ -1,8 +1,8 @@
 const TMDB_URL = "https://api.themoviedb.org/3";
 
-// const URL = 'https://fraja-movies-english-api.vercel.app/api';
+const URL = "https://fraja-movies-english-api.vercel.app/api";
 
-const URL = "http://localhost:3000/api";
+// const URL = "http://localhost:3000/api";
 
 // PROFILE ENDPOINTS //
 // ------------------//
@@ -15,11 +15,15 @@ export const TOKEN = `${URL}/profile?token=`;
 
 // COLLECTION
 const userId = "654170e693dc3bcf415f9a02";
+
 export const CREATE_COLLECTION = `${URL}/user/${userId}/createcollection`;
 export const DELETE_COLLECTION = `${URL}/user/${userId}/deletecollection?collection_id=`;
 export const GET_COLLECTION_SHOWS = `${URL}/user/${userId}/getcollectionshows?collection_id=`;
-export const UPDATE_COLLECTION = `${URL}/user/${userId}/updatecollection?collection_id=`;
+export const UPDATE_COLLECTION = `${URL}/user/${userId}/updatecollection/update?collection_id=`;
 export const GET_USER_COLLECTIONS = `${URL}/user/${userId}/getusercollections`;
+
+export const ADD_SHOW_TO_COLLECTION = `${URL}/user/${userId}/updatecollection/addshow?collection_id=`;
+export const DELETE_SHOW_FROM_COLLECTION = `${URL}/user/${userId}/updatecollection/deleteshow?collection_id=`;
 
 // //EDIT PROFILE
 // export const UPDATE_PROFILE = `${URL}/profile/edit`;

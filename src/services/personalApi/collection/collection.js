@@ -14,7 +14,7 @@ export const createCollection = async (body) => {
 export const deleteCollection = async (collectionId) => {
   try {
     const response = await axios.delete(
-      `${url.DELETE_COLLECTION}/${collectionId}`,
+      `${url.DELETE_COLLECTION}${collectionId}`,
     );
 
     return response.data;
@@ -24,10 +24,11 @@ export const deleteCollection = async (collectionId) => {
 };
 
 // deleteCollection
-export const updateCollection = async (collectionId) => {
+export const updateCollection = async (collectionId, body) => {
   try {
     const response = await axios.put(
-      `${url.UPDATE_COLLECTION}/${collectionId}`,
+      `${url.UPDATE_COLLECTION}${collectionId}`,
+      body,
     );
 
     return response.data;
@@ -36,10 +37,37 @@ export const updateCollection = async (collectionId) => {
   }
 };
 
+// addShowToCollection
+export const addShowToCollection = async (collectionId, body) => {
+  try {
+    const response = await axios.put(
+      `${url.ADD_SHOW_TO_COLLECTION}${collectionId}`,
+      body,
+    );
+
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+};
+
+// addShowToCollection
+export const deleteShowFromCollection = async (collectionId, body) => {
+  try {
+    const response = await axios.put(
+      `${url.DELETE_SHOW_FROM_COLLECTION}${collectionId}`,
+      body,
+    );
+
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+};
 export const getCollectionShows = async (collectionId) => {
   try {
     const response = await axios.get(
-      `${url.GET_COLLECTION_SHOWS}/${collectionId}`,
+      `${url.GET_COLLECTION_SHOWS}${collectionId}`,
     );
 
     return response.data;
