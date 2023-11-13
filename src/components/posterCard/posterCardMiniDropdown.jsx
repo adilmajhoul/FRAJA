@@ -1,12 +1,12 @@
-import { Dropdown } from "flowbite-react";
-import PosterCardMoreButton from "../posterCard/posterCardMoreButton";
-import { useState } from "react";
-import * as collection from "../../services/personalApi/collection/collection";
+import { Dropdown } from 'flowbite-react';
+import PosterCardMoreButton from '../posterCard/posterCardMoreButton';
+import { useState } from 'react';
+import * as collection from '../../services/personalApi/collection/collection';
 
-import { useAtom } from "jotai";
-import { clickedShowId } from "./posterCardAtoms";
+import { useAtom } from 'jotai';
+import { clickedShowId } from './posterCardAtoms';
 
-import { reRenderCollections } from "../profile/profileAtoms";
+import { reRenderCollections } from '../profile/profileAtoms';
 
 export default function PosterCardMiniDropdown() {
   const [collections, setCollections] = useState([]);
@@ -42,7 +42,7 @@ export default function PosterCardMiniDropdown() {
 
   return (
     <Dropdown
-      label=""
+      label=''
       dismissOnClick={false}
       renderTrigger={() => (
         <div>
@@ -53,14 +53,14 @@ export default function PosterCardMiniDropdown() {
       {/* ------------------ */}
       <Dropdown.Item onClick={() => fetchCollections()}>
         <Dropdown
-          label=""
+          label=''
           dismissOnClick={true}
           renderTrigger={() => (
             <div>
               <Dropdown.Item>add to collection > </Dropdown.Item>
             </div>
           )}
-          placement="right"
+          placement='right'
         >
           {collections.map((collection, key) => (
             <Dropdown.Item
@@ -74,14 +74,14 @@ export default function PosterCardMiniDropdown() {
       {/* ------------------- */}
       <Dropdown.Item onClick={() => fetchCollections()}>
         <Dropdown
-          label=""
+          label=''
           dismissOnClick={true}
           renderTrigger={() => (
             <div>
               <Dropdown.Item>remove from collection > </Dropdown.Item>
             </div>
           )}
-          placement="right"
+          placement='right'
         >
           {collections.map((collection, key) => (
             <Dropdown.Item
@@ -92,10 +92,6 @@ export default function PosterCardMiniDropdown() {
           ))}
         </Dropdown>
       </Dropdown.Item>
-      {/* ------------------- */}
-      <Dropdown.Item>Settings</Dropdown.Item>
-      <Dropdown.Item>Earnings</Dropdown.Item>
-      <Dropdown.Item>Sign out</Dropdown.Item>
     </Dropdown>
   );
 }

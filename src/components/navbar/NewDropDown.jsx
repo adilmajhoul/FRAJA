@@ -42,7 +42,7 @@ export default function NewDropDown({
   return (
     <div className='z-10 relative inline-block text-right'>
       <button
-        className={`flex flex-row items-center rounded  px-4 py-2 text-lg font-medium  text-white ${
+        className={`flex flex-row items-center rounded  px-3 py-2 text-lg font-medium  text-white ${
           isOpen ? 'text-red-500' : ''
         }`}
         ref={button}
@@ -63,7 +63,9 @@ export default function NewDropDown({
           setIsOpen(!isOpen);
         }}
       >
-        <span className='mr-2 flex items-center justify-between'>{title}</span>
+        <span className='mr-2 flex items-center justify-between font-semibold'>
+          {title}
+        </span>
         <span className='text-sm'>▾</span>
       </button>
       {isOpen && (

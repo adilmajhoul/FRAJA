@@ -94,16 +94,14 @@ export default function ProfilePrototype() {
         </div>
 
         <div className=' flex font-semibold h-12 items-center justify-center rounded-b-md border-t border-gray-600 text-[#aaa] text-lg '>
+          <button>Lists</button>
+
           <button
             onClick={() => setIsListOpen((prev) => !prev)}
             className={`mx-5 hover:text-red-600 hover:border-b-4 hover:border-red-600 ${
               isListOpen ? 'border-b-4 border-red-600' : ''
             }`}
           >
-            Lists
-          </button>
-
-          <button className='mx-5 hover:text-red-600 hover:border-b-4 hover:border-red-600'>
             Collections
           </button>
 
@@ -121,21 +119,23 @@ export default function ProfilePrototype() {
         </div>
       </div>
 
-      {/* ----------------------- */}
-
       {isListOpen && (
-        <div
-          id='container'
-          className='mt-5 py-4 mx-10 flex flex-col  rounded-md border border-gray-600 text-white'
-        >
-          {collections.map((collection, key) => (
-            <List
-              key={key}
-              title={collection.name}
-              shows={collection.shows.map((show) => show)}
-            />
-          ))}
-          {/* -------------------------- */}
+        <div>
+          <div
+            id='container'
+            className='mt-5 py-4 mx-10 flex flex-col  rounded-md border border-gray-600 text-white'
+          >
+            <button className='text-xl flex justify-center items-center'>
+              Create Collection <h1 className='ml-3 text-4xl'>+</h1>
+            </button>
+            {collections.map((collection, key) => (
+              <List
+                key={key}
+                title={collection.name}
+                shows={collection.shows.map((show) => show)}
+              />
+            ))}
+          </div>
         </div>
       )}
     </div>
