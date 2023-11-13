@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "status_message": "Query was successful",
+  "data": {
+    "movie": {
+      "id": 2723,
+      "url": "https://yts.mx/movies/shutter-island-2010",
+      "imdb_code": "tt1130884",
+      "title": "Shutter Island",
+      "title_english": "Shutter Island",
+      "title_long": "Shutter Island (2010)",
+      "slug": "shutter-island-2010",
+      "year": 2010,
+      "rating": 8.2,
+      "runtime": 138,
+      "genres": ["Action", "Mystery", "Thriller"],
+      "like_count": 669,
+      "description_intro": "Assigned the thorny task of investigating the incomprehensible disappearance of a deranged child-murderess, troubled U.S. Marshal Teddy Daniels and his new partner, Chuck Aule, travel to Ashecliffe Hospital: Shutter Island's impregnable asylum for the criminally insane. Soon, within the dark purgatory's thick stone walls, indescribable nuances of medical malpractice suggest that the institution's cryptic senior psychiatrists must be hiding something. Then, a raging tempest traps patients and investigators alike in the dark off-shore prison, triggering Teddy's crippling migraines and gruesome flashbacks of a haunting past. Is the already perplexed detective losing his grip on reality?—Nick Riganas",
+      "description_full": "Assigned the thorny task of investigating the incomprehensible disappearance of a deranged child-murderess, troubled U.S. Marshal Teddy Daniels and his new partner, Chuck Aule, travel to Ashecliffe Hospital: Shutter Island's impregnable asylum for the criminally insane. Soon, within the dark purgatory's thick stone walls, indescribable nuances of medical malpractice suggest that the institution's cryptic senior psychiatrists must be hiding something. Then, a raging tempest traps patients and investigators alike in the dark off-shore prison, triggering Teddy's crippling migraines and gruesome flashbacks of a haunting past. Is the already perplexed detective losing his grip on reality?—Nick Riganas",
+      "yt_trailer_code": "qdPw9x9h5CY",
+      "language": "en",
+      "mpa_rating": "R",
+      "background_image": "https://yts.mx/assets/images/movies/Shutter_Island_2010/background.jpg",
+      "background_image_original": "https://yts.mx/assets/images/movies/Shutter_Island_2010/background.jpg",
+      "small_cover_image": "https://yts.mx/assets/images/movies/Shutter_Island_2010/small-cover.jpg",
+      "medium_cover_image": "https://yts.mx/assets/images/movies/Shutter_Island_2010/medium-cover.jpg",
+      "large_cover_image": "https://yts.mx/assets/images/movies/Shutter_Island_2010/large-cover.jpg",
+      "torrents": [
+        {
+          "url": "https://yts.mx/torrent/download/6AADAA2244D31930B5674E846D1AD341B0176AF0",
+          "hash": "6AADAA2244D31930B5674E846D1AD341B0176AF0",
+          "quality": "720p",
+          "type": "bluray",
+          "is_repack": "0",
+          "video_codec": "x264",
+          "bit_depth": "8",
+          "audio_channels": "2.0",
+          "seeds": 65,
+          "peers": 6,
+          "size": "599.84 MB",
+          "size_bytes": 628977828,
+          "date_uploaded": "2015-11-01 01:25:26",
+          "date_uploaded_unix": 1446337526
+        },
+        {
+          "url": "https://yts.mx/torrent/download/CDF09BFFC475789AA557EFF19A090735412BE99D",
+          "hash": "CDF09BFFC475789AA557EFF19A090735412BE99D",
+          "quality": "1080p",
+          "type": "bluray",
+          "is_repack": "0",
+          "video_codec": "x264",
+          "bit_depth": "8",
+          "audio_channels": "2.0",
+          "seeds": 100,
+          "peers": 60,
+          "size": "1.90 GB",
+          "size_bytes": 2040109466,
+          "date_uploaded": "2015-11-01 01:25:27",
+          "date_uploaded_unix": 1446337527
+        },
+        {
+          "url": "https://yts.mx/torrent/download/D32FE5583B0715BFEE2F5415690D24DEB9570C47",
+          "hash": "D32FE5583B0715BFEE2F5415690D24DEB9570C47",
+          "quality": "2160p",
+          "type": "bluray",
+          "is_repack": "",
+          "video_codec": "x265",
+          "bit_depth": "10",
+          "audio_channels": "5.1",
+          "seeds": 74,
+          "peers": 28,
+          "size": "6.92 GB",
+          "size_bytes": 7430293422,
+          "date_uploaded": "2022-03-24 21:27:18",
+          "date_uploaded_unix": 1648153638
+        }
+      ],
+      "date_uploaded": "2015-11-01 01:25:26",
+      "date_uploaded_unix": 1446337526
+    }
+  },
+  "@meta": {
+    "server_time": 1699801301,
+    "server_timezone": "CET",
+    "api_version": 2,
+    "execution_time": "0 ms"
+  }
+}
