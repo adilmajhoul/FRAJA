@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import randomFetch from '../../utils/randomFetch';
+import randomFetch from './utils';
 
 // ------------------------------
 // state to store the random genre and page genrate in the home page for the routing to not lose state of it

@@ -11,7 +11,7 @@ import { isTitleFiltering, byRatingMin, byRatingMax } from '../search/atoms';
 import { englishGenresNameFirst as genres } from '../../data/englishGenresNameFirst';
 import { apiKey } from '../../data/apiKey';
 
-import randomFetch from '../../utils/randomFetch';
+import randomFetch from './utils';
 import { catchRandomGenre, catchRandomPage } from './mappedAtoms';
 
 export default function MappedPosterWithInfiniteScroll() {

@@ -13,7 +13,7 @@ const imageConfig = {
 };
 
 import { useAtom } from 'jotai';
-import { catchRandomGenre, catchRandomPage } from '../search/atoms';
+import { catchRandomGenre, catchRandomPage } from '../mappedPoster/mappedAtoms';
 import PosterCardMiniDropdown from './posterCardMiniDropdown';
 
 import { clickedShowId } from './posterCardAtoms';
