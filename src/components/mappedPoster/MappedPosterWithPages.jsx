@@ -1,23 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
-import axios from "axios";
-import PosterCard from "../posterCard/PosterCard";
-import InfiniteScroll from "react-infinite-scroll-component";
+import axios from 'axios';
+import PosterCard from '../posterCard/PosterCard';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-import { useAtom } from "jotai";
-import {
-  isTitleFiltering,
-  byRatingMin,
-  byRatingMax,
-  catchRandomGenre,
-  catchRandomPage,
-} from "../search/atoms";
+import { useAtom } from 'jotai';
+import { isTitleFiltering, byRatingMin, byRatingMax } from '../search/atoms';
 
-import { englishGenresNameFirst as genres } from "../../data/englishGenresNameFirst";
-import { apiKey } from "../../data/apiKey";
+import { englishGenresNameFirst as genres } from '../../data/englishGenresNameFirst';
+import { apiKey } from '../../data/apiKey';
 
-import randomFetch from "../../utils/randomFetch";
+import randomFetch from '../../utils/randomFetch';
+import { catchRandomGenre, catchRandomPage } from './mappedAtoms';
 
 export default function MappedPosterWithInfiniteScroll() {
   const [moviesList, setMoviesList] = useState([]);
@@ -25,21 +20,18 @@ export default function MappedPosterWithInfiniteScroll() {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
 
-  // --------------------
-
-  // --------------------
   // set up random page and genre
   const [randomGenre, setRandomGenre] = useAtom(
-    catchRandomGenre === "" ? randomFetch("genre") : catchRandomGenre,
+    catchRandomGenre === '' ? randomFetch('genre') : catchRandomGenre
   );
   const [randomPage, setRandomPage] = useAtom(
-    catchRandomGenre === "" ? randomFetch("page") : catchRandomGenre,
+    catchRandomPage === '' ? randomFetch('page') : catchRandomPage
   );
 
   // set up random page and genre
   useEffect(() => {
-    setRandomPage(randomFetch("page"));
-    setRandomGenre(randomFetch("genre"));
+    setRandomPage(randomFetch('page'));
+    setRandomGenre(randomFetch('genre'));
   }, [page, genre, location]);
 
   const [currentPage, setCurrentPage] = useState(parseInt(page) || randomPage);
@@ -59,10 +51,10 @@ export default function MappedPosterWithInfiniteScroll() {
     try {
       const res = await axios.get(
         `https://api.themoviedb.org/3/discover/${
-          showType || "movie"
+          showType || 'movie'
         }?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${
           genres[genre] || randomGenre
-        }&page=${currentPage}`,
+        }&page=${currentPage}`
       );
       const data = res.data.results;
 
@@ -88,21 +80,21 @@ export default function MappedPosterWithInfiniteScroll() {
 
     fetchData();
 
-    console.log("genre:", genre, "page:", page, "showType:", showType);
+    console.log('genre:', genre, 'page:', page, 'showType:', showType);
   }, [genre, page, showType, minRating, maxRating]);
   // --------------------
   return (
     <div>
       {!titleFiltering && (
         <div>
-          <span className="text-white">default shows</span>
+          <span className='text-white'>default shows</span>
           <InfiniteScroll
             dataLength={moviesList.length}
             next={fetchData}
             hasMore={hasMoreData.current}
-            loader={<h4 className="text-white">Loading...</h4>}
+            loader={<h4 className='text-white'>Loading...</h4>}
           >
-            <div className="flex flex-wrap justify-center">
+            <div className='flex flex-wrap justify-center'>
               {moviesList.map((show, idx) => (
                 <PosterCard show={show} key={show.id || idx} />
               ))}

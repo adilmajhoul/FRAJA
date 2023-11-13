@@ -8,6 +8,6 @@ export default function randomFetch(pageOrGenre) {
   if (pageOrGenre === 'genre') {
     return numberList[randomIndex];
   } else if (pageOrGenre === 'page') {
-    return Math.floor(Math.random() * 100);
+    return Math.floor(Math.random() * 500);
   }
 }
