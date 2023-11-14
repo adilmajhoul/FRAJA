@@ -1,16 +1,10 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-
-import { Routes, Route, Link, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { englishGenresNameFirst as genres } from '../../data/englishGenresNameFirst';
-
 import { useAtom } from 'jotai';
 import { isTitleFiltering } from '../search/atoms';
 
-export default function NewDropDown({
-  title,
-  showType,
-  menuItems = { testItem1: 1, testItem2: 2 },
-}) {
+export default function NewDropDown({ title, showType, menuItems }) {
   let [isOverButton, setIsOverButton] = useState(false);
   let [isOverList, setIsOverList] = useState(false);
   let [isOpen, setIsOpen] = useState();
@@ -18,9 +12,9 @@ export default function NewDropDown({
   let [hasClicked, setHasClicked] = useState();
   let button = useRef(null);
 
-  const [titleFiltering, setTitleFiltering] = useAtom(isTitleFiltering);
+  const navigate = useNavigate();
 
-  const myItems = { ...menuItems };
+  const [titleFiltering, setTitleFiltering] = useAtom(isTitleFiltering);
 
   useLayoutEffect(() => {
     if (isOpen && !isOverButton && !isOverList && !isTouchInput) {
@@ -85,12 +79,14 @@ export default function NewDropDown({
                 setIsOpen(false);
 
                 setTitleFiltering(false);
+
+                navigate(`/top/${showType}/${englishGenresList[index]}/1/`);
               }}
               className='cursor-pointer px-4 py-2 hover:text-red-600'
             >
-              <Link to={`/top/${showType}/${englishGenresList[index]}/1`}>
-                {item}
-              </Link>
+              {/* <Link to={`/top/${showType}/${englishGenresList[index]}/1`}> */}
+              {item}
+              {/* </Link> */}
             </li>
           ))}
         </ul>

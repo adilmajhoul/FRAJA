@@ -10,31 +10,18 @@ import { isTitleFiltering, byRatingMin, byRatingMax } from '../search/atoms';
 
 import { englishGenresNameFirst as genres } from '../../data/englishGenresNameFirst';
 import { apiKey } from '../../data/apiKey';
+import FilterBar from '../search/filterBar';
+import MappedForFilter from '../search/MappedForFilter';
 
-import randomFetch from './utils';
-import { catchRandomGenre, catchRandomPage } from './mappedAtoms';
-
-export default function MappedPosterWithInfiniteScroll() {
+export default function TopMovies() {
   const [moviesList, setMoviesList] = useState([]);
   const { showType, genre, page } = useParams();
   const location = useLocation();
   const [loading, setLoading] = useState(true);
 
-  // set up random page and genre
-  const [randomGenre, setRandomGenre] = useAtom(
-    catchRandomGenre === '' ? randomFetch('genre') : catchRandomGenre
-  );
-  const [randomPage, setRandomPage] = useAtom(
-    catchRandomPage === '' ? randomFetch('page') : catchRandomPage
-  );
+  const [currentPage, setCurrentPage] = useState(parseInt(page) || 1);
+  const [currentGenre, setCurrentGenre] = useState(genre);
 
-  // set up random page and genre
-  useEffect(() => {
-    setRandomPage(randomFetch('page'));
-    setRandomGenre(randomFetch('genre'));
-  }, [page, genre, location]);
-
-  const [currentPage, setCurrentPage] = useState(parseInt(page) || randomPage);
   // --------------------
 
   const hasMoreData = useRef(true);
@@ -49,13 +36,11 @@ export default function MappedPosterWithInfiniteScroll() {
   // --------------------
   const fetchData = async () => {
     try {
-      const res = await axios.get(
-        `https://api.themoviedb.org/3/discover/${
-          showType || 'movie'
-        }?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${
-          genres[genre] || randomGenre
-        }&page=${currentPage}`
-      );
+      const baseurl = 'https://api.themoviedb.org/3/discover';
+      const url = `${baseurl}/${showType}?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${genres[currentGenre]}&page=${currentPage}`;
+
+      const res = await axios.get(url);
+
       const data = res.data.results;
 
       if (data.length > 0) {
@@ -75,16 +60,20 @@ export default function MappedPosterWithInfiniteScroll() {
   // --------------------
   useEffect(() => {
     setCurrentPage(parseInt(page) || 1);
+    setCurrentGenre(genre);
     setMoviesList([]); // Reset the movies list when the genre or page changes
     hasMoreData.current = true; // Reset hasMoreData to true
 
     fetchData();
 
     console.log('genre:', genre, 'page:', page, 'showType:', showType);
-  }, [genre, page, showType, minRating, maxRating]);
+  }, [genre, page, showType, minRating, maxRating, location]);
   // --------------------
   return (
     <div>
+      <FilterBar />
+      {titleFiltering && <MappedForFilter />}
+
       {!titleFiltering && (
         <div>
           <span className='text-white'>default shows</span>

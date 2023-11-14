@@ -39,7 +39,7 @@ function PosterCard({ show }) {
   }
 
   function getGenres(ids) {
-    return ids.map((id) => englishGenresIdFirst[id]);
+    return ids.map(id => englishGenresIdFirst[id]);
   }
   function parseYear(yearString) {
     return yearString.split('-')[0];
@@ -57,7 +57,7 @@ function PosterCard({ show }) {
       <div
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
-        className={`group m-4 flex  h-[400px] w-[300px] flex-col justify-between rounded-xl text-right hover:cursor-pointer`}
+        className={`group m-4 flex h-[280px]  w-[180px] md:h-[300px]  md:w-[200px] xl:h-[400px] xl:w-[300px] flex-col justify-between rounded-xl text-right hover:cursor-pointer`}
       >
         {/* link */}
         <div
@@ -72,7 +72,7 @@ function PosterCard({ show }) {
                 <div className='flex flex-col text-sm font-semibold'>
                   {/* genres ----------------------------------------- */}
                   <div className='flex justify-between'>
-                    <div onClick={(e) => handleClickMore(e)}>
+                    <div onClick={e => handleClickMore(e)}>
                       <PosterCardMiniDropdown />
                     </div>
                     <div className=' flex flex-col items-end'>
