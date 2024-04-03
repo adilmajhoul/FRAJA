@@ -1,5 +1,5 @@
 ## i guess this tree explains the project structure more than any words:
-`
+```
 .
 ├── index.html
 ├── package.json
@@ -115,4 +115,4 @@
 ├── tailwind.config.js
 ├── vercel.json
 └── vite.config.js
-`
+```
