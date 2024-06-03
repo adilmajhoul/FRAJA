@@ -24,10 +24,10 @@ export default function HomeMovies() {
 
   // set up random page and genre
   const [randomGenre, setRandomGenre] = useAtom(
-    catchRandomGenre === '' ? randomFetch('genre') : catchRandomGenre
+    catchRandomGenre === '' ? randomFetch('genre') : catchRandomGenre,
   );
   const [randomPage, setRandomPage] = useAtom(
-    catchRandomPage === '' ? randomFetch('page') : catchRandomPage
+    catchRandomPage === '' ? randomFetch('page') : catchRandomPage,
   );
 
   // set up random page and genre
@@ -56,14 +56,14 @@ export default function HomeMovies() {
           showType || 'movie'
         }?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${
           genres[genre] || randomGenre
-        }&page=${currentPage}`
+        }&page=${currentPage}&include_adult=false`,
       );
       const data = res.data.results;
 
       if (data.length > 0) {
-        setMoviesList((prevMovies) => [
+        setMoviesList(prevMovies => [
           ...prevMovies,
-          ...data.filter((show) => ratingFilter(show)),
+          ...data.filter(show => ratingFilter(show)),
         ]);
 
         setCurrentPage(currentPage + 1);

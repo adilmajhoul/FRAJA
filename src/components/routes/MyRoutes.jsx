@@ -24,10 +24,7 @@ export default function MyRoutes() {
         {/* <Route path='/profile/:firebaseId' element={<Profile />} /> */}
 
         {/* movie page route */}
-        <Route
-          path='top/:showType/:genre/:page/:movieId'
-          element={<ShowPage />}
-        />
+        <Route path='/:showType/:genre/:page/:movieId' element={<ShowPage />} />
 
         {/* protected routes */}
         <Route element={<ProtectedRoute />}>

@@ -22,22 +22,22 @@ export default function PosterCardMiniDropdown() {
     setCollections(coll);
   };
 
-  const addThisShowToCollection = async (collectionId) => {
+  const addThisShowToCollection = async collectionId => {
     const body = {
       showId: currentClickedShowId,
     };
     await collection.addShowToCollection(collectionId, body);
 
-    setRenderCollections((prev) => !prev);
+    setRenderCollections(prev => !prev);
   };
 
-  const deleteThisShowToCollection = async (collectionId) => {
+  const deleteThisShowToCollection = async collectionId => {
     const body = {
       showId: currentClickedShowId,
     };
     await collection.deleteShowFromCollection(collectionId, body);
 
-    setRenderCollections((prev) => !prev);
+    setRenderCollections(prev => !prev);
   };
 
   return (
@@ -78,7 +78,7 @@ export default function PosterCardMiniDropdown() {
           dismissOnClick={true}
           renderTrigger={() => (
             <div>
-              <Dropdown.Item>remove from collection > </Dropdown.Item>
+              <Dropdown.Item>remove from collection </Dropdown.Item>
             </div>
           )}
           placement='right'

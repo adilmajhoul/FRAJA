@@ -37,16 +37,16 @@ export default function TopMovies() {
   const fetchData = async () => {
     try {
       const baseurl = 'https://api.themoviedb.org/3/discover';
-      const url = `${baseurl}/${showType}?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${genres[currentGenre]}&page=${currentPage}`;
+      const url = `${baseurl}/${showType}?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${genres[currentGenre]}&page=${currentPage}&include_adult=false`;
 
       const res = await axios.get(url);
 
       const data = res.data.results;
 
       if (data.length > 0) {
-        setMoviesList((prevMovies) => [
+        setMoviesList(prevMovies => [
           ...prevMovies,
-          ...data.filter((show) => ratingFilter(show)),
+          ...data.filter(show => ratingFilter(show)),
         ]);
 
         setCurrentPage(currentPage + 1);
