@@ -25,7 +25,7 @@ export default function ShowPage() {
   }, [movieId]);
 
   return (
-    <div className='h-screen flex flex-col justify-between text-white'>
+    <div className='flex flex-col justify-between text-white'>
       <ShowDetailsCard />
       <StreamCard show={show} />
       <CommentsCard />
