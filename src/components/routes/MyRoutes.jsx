@@ -24,7 +24,10 @@ export default function MyRoutes() {
         {/* <Route path='/profile/:firebaseId' element={<Profile />} /> */}
 
         {/* movie page route */}
-        <Route path='/:showType/:genre/:page/:movieId' element={<ShowPage />} />
+        <Route
+          path='top/:showType/:genre/:page/:movieId'
+          element={<ShowPage />}
+        />
 
         {/* protected routes */}
         <Route element={<ProtectedRoute />}>
@@ -34,3 +37,29 @@ export default function MyRoutes() {
     </div>
   );
 }
+
+// export default function MyRoutes() {
+//   return (
+//     <div>
+//       <Routes>
+//         <Route path='/top/:showType/:genre/:page' element={<TopMovies />} />
+//         <Route path='/' element={<HomeMovies />} />
+
+//         {/* authentification */}
+//         <Route path='/login' element={<Login />} />
+//         <Route path='/signup' element={<Signup />} />
+
+//         {/* <Route path='/profile/:firebaseId' element={<Profile />} /> */}
+
+//         {/* movie page route */}
+
+//         <Route path='/:showType/:genre/:page/:movieId' element={<ShowPage />} />
+
+//         {/* protected routes */}
+//         <Route element={<ProtectedRoute />}>
+//           <Route path='/profile/:userId' element={<Profile />} />
+//         </Route>
+//       </Routes>
+//     </div>
+//   );
+// }
