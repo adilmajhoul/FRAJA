@@ -51,11 +51,11 @@ export default function ShowDetailsCard() {
   const mainCast = credits.cast.slice(0, 5); // Get top 5 cast members
 
   return (
-    <div className=' bg-[#3d3d3d] rounded-3xl shadow-md text-gray-200 flex w-[98%] mx-auto mb-10'>
+    <div className=' bg-[#3d3d3d] rounded-3xl shadow-md text-gray-200 flex w-[97%] mx-auto mb-10'>
       <div className='md:flex'>
         <div className='md:flex-shrink-0'>
           <img
-            className='h-full w-full object-cover md:w-64'
+            className='h-full w-full object-cover md:w-64 rounded-t-3xl md:rounded-l-3xl'
             src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
             alt={show.title || show.name}
           />
