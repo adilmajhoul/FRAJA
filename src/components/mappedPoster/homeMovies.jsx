@@ -92,7 +92,6 @@ export default function HomeMovies() {
 
       {!titleFiltering && (
         <div>
-          <span className='text-white'>default shows</span>
           <InfiniteScroll
             dataLength={moviesList.length}
             next={fetchData}
