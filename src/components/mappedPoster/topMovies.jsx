@@ -37,7 +37,7 @@ export default function TopMovies() {
   const fetchData = async () => {
     try {
       const baseurl = 'https://api.themoviedb.org/3/discover';
-      const url = `${baseurl}/${showType}?api_key=${apiKey}&sort_by=popularity.desc&with_genres=${genres[currentGenre]}&page=${currentPage}&include_adult=false`;
+      const url = `${baseurl}/${showType}?api_key=${apiKey}&include_adult=false&sort_by=popularity.desc&with_genres=${genres[currentGenre]}&page=${currentPage}`;
 
       const res = await axios.get(url);
 
